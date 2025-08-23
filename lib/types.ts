@@ -1,0 +1,53 @@
+export interface Category {
+  id: string
+  titlePrimary: string // Main language title
+  titleSecondary: string // Secondary language title
+  description?: string
+  image?: string
+  order: number
+  isActive: boolean
+  createdAt: Date
+  updatedAt: Date
+}
+
+export interface Product {
+  id: string
+  categoryId: string
+  titlePrimary: string // Main language title
+  titleSecondary: string // Secondary language title
+  description?: string
+  ingredients: string[] // Array of ingredients like ["lettuce", "sauce", "cheese"]
+  price: number
+  originalPrice?: number // For discounted items
+  image?: string
+  images?: string[] // Multiple product images
+  isActive: boolean
+  isFeatured: boolean
+  order: number
+  nutritionInfo?: {
+    calories?: number
+    protein?: number
+    carbs?: number
+    fat?: number
+  }
+  allergens?: string[]
+  preparationTime?: number // in minutes
+  createdAt: Date
+  updatedAt: Date
+}
+
+export interface MenuData {
+  categories: Category[]
+  products: Product[]
+  lastUpdated: Date
+}
+
+// API Response types
+export interface ApiResponse<T> {
+  success: boolean
+  data?: T
+  error?: string
+  message?: string
+}
+
+export interface MenuResponse extends ApiResponse<MenuData> {}
