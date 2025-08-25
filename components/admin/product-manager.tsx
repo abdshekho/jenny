@@ -204,22 +204,22 @@ export function ProductManager() {
           { filteredProducts.map((product) => {
             const category = MenuService.getCategoryById(categories, product.categoryId)
             return (
-              <Card key={ product.id } className="bg-card">
+              <Card key={ product.id } className="bg-black/20">
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <CardTitle className="text-lg text-card-foreground flex items-center gap-2">
+                      <CardTitle className="text-lg text-primary flex items-center gap-2">
                         { product.titlePrimary }
                         { product.isFeatured && <Star className="h-4 w-4 text-accent fill-current" /> }
                       </CardTitle>
-                      <p className="text-sm ">{ product.titleSecondary }</p>
+                      <p className="text-sm text-white">{ product.titleSecondary }</p>
 
                     </div>
                     <div className="flex flex-col items-center">
                       <Badge variant="outline" className="text-xs bg-black">
                         { category?.titlePrimary }
                       </Badge>
-                      <Badge variant={ product.isActive ? "default" : "secondary" } className="mt-1">
+                      <Badge variant={ product.isActive ? "default" : "destructive" } className="mt-1">
                         { product.isActive ? "Active" : "Inactive" }
                       </Badge>
                     </div>
@@ -248,7 +248,7 @@ export function ProductManager() {
                     {/* Featured Badge */ }
                     { product.isFeatured && (
                       <div className="absolute top-3 left-3">
-                        <div className="bg-primary text-primary-foreground px-2 py-1 rounded-full text-sm font-medium flex items-center gap-1">
+                        <div className="bg-primary text-black px-2 py-1 rounded-full text-sm font-medium flex items-center gap-1">
                           <Star className="h-3 w-3 fill-current" />
                           Special
                         </div>
@@ -278,7 +278,7 @@ export function ProductManager() {
                   </div>
 
                   { product.description && (
-                    <p className="text-sm text-card-foreground line-clamp-2">{ product.description }</p>
+                    <p className="text-sm text-white line-clamp-2">{ product.description }</p>
                   ) }
 
 

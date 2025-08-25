@@ -9,6 +9,7 @@ import { InstallPrompt } from "@/components/pwa/install-prompt"
 import { MenuService } from "@/lib/menu-utils"
 import type { Category, Product } from "@/lib/types"
 import { Loader2 } from "lucide-react"
+import Image from "next/image"
 
 export default function MenuPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
@@ -59,12 +60,15 @@ export default function MenuPage() {
 
       {loading ? (
         <div className="flex justify-center items-center py-20">
-          <Loader2 className="h-8 w-8 animate-spin" />
+          <div className="logo-loader">
+                      <Image src={ 'logo2.png' } alt="logo" width={ 200 } height={ 200 } />
+          </div>
+          {/* <Loader2 className="h-8 w-8 animate-spin" /> */}
         </div>
       ) : (
         <main className="container mx-auto px-4 py-8 space-y-12">
         {/* Featured Items Section */}
-        {selectedCategory === "all" && featuredProducts.length > 0 && (
+        {/* {selectedCategory === "all" && featuredProducts.length > 0 && (
           <section className="space-y-6">
             <div className="text-center flex flex-col items-center">
               <h2 className="text-3xl font-bold text-black bg-primary py-2 px-4">Chef's Specials</h2>
@@ -101,7 +105,7 @@ export default function MenuPage() {
               ))):<div></div>}
             </div>
           </section>
-        )}
+        )} */}
 
           {/* Menu Sections */}
           {filteredMenuData.map(({ category, products }) => (

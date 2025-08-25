@@ -25,7 +25,7 @@ export function AdminDashboard() {
       title: "Total Products",
       value: activeProducts.length,
       icon: Package,
-      color: "text-secondary",
+      color: "text-chart-1",
     },
     {
       title: "Featured Items",
@@ -52,13 +52,13 @@ export function AdminDashboard() {
         {stats.map((stat) => {
           const Icon = stat.icon
           return (
-            <Card key={stat.title}>
+            <Card key={stat.title} className="bg-black/50">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-card-foreground">{stat.title}</CardTitle>
-                <Icon className={cn("h-4 w-4", stat.color)} />
+                <CardTitle className="text-sm font-medium text-white/70">{stat.title}</CardTitle>
+                <Icon className={cn("h-5 w-5", stat.color)} />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-card-foreground">{stat.value}</div>
+                <div className="text-2xl font-bold text-white">{stat.value}</div>
               </CardContent>
             </Card>
           )
@@ -66,18 +66,18 @@ export function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
+        <Card className="bg-black/50">
           <CardHeader>
-            <CardTitle className="text-card-foreground">Recent Categories</CardTitle>
+            <CardTitle className="text-white">Recent Categories</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {activeCategories.slice(0, 4).map((category) => (
               <div key={category._id} className="flex items-center justify-between">
                 <div>
-                  <p className="font-medium text-card-foreground">{category.titlePrimary}</p>
+                  <p className="font-medium text-primary">{category.titlePrimary}</p>
                   <p className="text-sm text-muted-foreground">{category.titleSecondary}</p>
                 </div>
-                <Badge variant="secondary">
+                <Badge variant="default" className="text-black">
                   {MenuService.getProductsByCategory(mockProducts, category._id).length} items
                 </Badge>
               </div>
@@ -85,16 +85,16 @@ export function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-black/50">
           <CardHeader>
-            <CardTitle className="text-card-foreground">Featured Products</CardTitle>
+            <CardTitle className="text-white">Featured Products</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {featuredProducts.slice(0, 4).map((product) => (
               <div key={product._id} className="flex items-center justify-between">
                 <div>
-                  <p className="font-medium text-card-foreground">{product.titlePrimary}</p>
-                  <p className="text-sm text-muted-foreground">{product.titleSecondary}</p>
+                  <p className="font-medium text-primary">{product.titlePrimary}</p>
+                  <p className="text-sm text-white">{product.titleSecondary}</p>
                 </div>
                 <Badge variant="outline" className="text-primary border-primary">
                   ${product.price}

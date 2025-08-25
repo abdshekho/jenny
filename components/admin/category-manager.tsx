@@ -11,11 +11,10 @@ import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { ImageUpload } from "@/components/admin/image-upload"
-import { ImageGalleryDialog } from "@/components/admin/image-gallery"
+
 import { apiClient } from "@/lib/api-client"
 import type { Category } from "@/lib/types"
-import { Plus, Edit, Trash2, ImageIcon, Loader2 } from "lucide-react"
+import { Plus, Edit, Trash2, Loader2 } from "lucide-react"
 import { toast } from "sonner"
 
 export function CategoryManager() {
@@ -166,19 +165,7 @@ export function CategoryManager() {
             </CardHeader>
 
             <CardContent className="space-y-4">
-              {/* Category Image */}
-              {category.image && (
-                <div className="aspect-video rounded-lg overflow-hidden">
-                  <img
-                    src={category.image || "/placeholder.svg"}
-                    alt={category.titlePrimary}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.src = `/placeholder.svg?height=150&width=250&query=${encodeURIComponent(category.titlePrimary)}`
-                    }}
-                  />
-                </div>
-              )}
+
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -230,7 +217,6 @@ function CategoryForm({
   const [formData, setFormData] = useState({
     titlePrimary: category?.titlePrimary || "",
     titleSecondary: category?.titleSecondary || "",
-    image: category?.image || "",
   })
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -266,26 +252,10 @@ function CategoryForm({
 
 
 
-      <div className="space-y-2">
-        <Label>Category Image</Label>
-        <div className="space-y-4">
-          <ImageUpload value={formData.image} onChange={(url) => setFormData((prev) => ({ ...prev, image: url }))} />
-          <div className="flex gap-2">
-            <ImageGalleryDialog
-              onSelect={(url) => setFormData((prev) => ({ ...prev, image: url }))}
-              selectedUrl={formData.image}
-            >
-              <Button type="button" variant="outline" size="sm" className="text-black">
-                <ImageIcon className="h-4 w-4 mr-2 text-black" />
-                Choose from Gallery
-              </Button>
-            </ImageGalleryDialog>
-          </div>
-        </div>
-      </div>
+
 
       <div className="flex gap-2 pt-4">
-        <Button type="submit" className="flex-1 bg-primary text-primary-foreground" disabled={saving}>
+        <Button type="submit" className="flex-1 bg-primary text-black" disabled={saving}>
           {saving && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
           {category ? "Update" : "Create"} Category
         </Button>

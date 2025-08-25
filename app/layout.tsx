@@ -6,15 +6,15 @@ import { ServiceWorkerRegistration } from "@/components/pwa/service-worker-regis
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Al Baik Restaurant Menu",
-  description: "Digital menu for Al Baik Restaurant - Browse our delicious dishes, specials, and authentic flavors",
+  title: "JENNY'S BURGER",
+  description: "Digital menu for Jenny's Burger Restaurant - Browse our delicious dishes, specials, and authentic flavors",
   generator: "Next.js",
-  applicationName: "Al Baik Menu",
+  applicationName: "Jenny's Burger Menu",
   referrer: "origin-when-cross-origin",
-  keywords: ["restaurant", "menu", "food", "Al Baik", "dining", "Arabic cuisine"],
-  authors: [{ name: "Al Baik Restaurant" }],
-  creator: "Al Baik Restaurant",
-  publisher: "Al Baik Restaurant",
+  keywords: ["restaurant", "menu", "food", "Jenny's Burger", "dining", "Arabic cuisine"],
+  authors: [{ name: "Jenny's Burger Restaurant" }],
+  creator: "Jenny's Burger Restaurant",
+  publisher: "Jenny's Burger Restaurant",
   formatDetection: {
     email: false,
     address: false,

@@ -2,7 +2,6 @@ export interface Category {
   _id: string
   titlePrimary: string // Main language title
   titleSecondary: string // Secondary language title
-  image?: string
   order: number
   isActive: boolean
   createdAt: Date

@@ -12,10 +12,7 @@ const CategorySchema = new mongoose.Schema({
     trim: true
   },
 
-  image: {
-    type: String,
-    trim: true
-  },
+
   order: {
     type: Number,
     default: 0

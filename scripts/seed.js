@@ -45,28 +45,28 @@ const categories = [
   {
     titlePrimary: "Appetizers",
     titleSecondary: "المقبلات",
-    image: "/images/categories/appetizers.jpg",
+
     order: 1,
     isActive: true
   },
   {
     titlePrimary: "Main Courses",
     titleSecondary: "الأطباق الرئيسية",
-    image: "/images/categories/mains.jpg",
+
     order: 2,
     isActive: true
   },
   {
     titlePrimary: "Desserts",
     titleSecondary: "الحلويات",
-    image: "/images/categories/desserts.jpg",
+
     order: 3,
     isActive: true
   },
   {
     titlePrimary: "Beverages",
     titleSecondary: "المشروبات",
-    image: "/images/categories/beverages.jpg",
+
     order: 4,
     isActive: true
   }
