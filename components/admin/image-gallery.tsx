@@ -88,7 +88,7 @@ export function ImageGallery({ onSelect, selectedUrl }: ImageGalleryProps) {
     <div className="space-y-4">
       <div className="flex items-center gap-4">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4" />
           <Input
             placeholder="Search images..."
             value={searchTerm}
@@ -116,11 +116,11 @@ export function ImageGallery({ onSelect, selectedUrl }: ImageGalleryProps) {
       ) : filteredImages.length === 0 ? (
         <Card>
           <CardContent className="p-12 text-center">
-            <ImageIcon className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-lg font-medium text-muted-foreground">
+            <ImageIcon className="h-12 w-12 mx-auto mb-4" />
+            <p className="text-lg font-medium">
               {searchTerm ? "No images found" : "No images uploaded yet"}
             </p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm">
               {searchTerm ? "Try a different search term" : "Upload some images to get started"}
             </p>
           </CardContent>
@@ -172,11 +172,11 @@ export function ImageGallery({ onSelect, selectedUrl }: ImageGalleryProps) {
 
                 <div className="p-3 space-y-1">
                   <p className="text-sm font-medium truncate">{image.filename}</p>
-                  <div className="flex items-center justify-between text-xs text-muted-foreground">
-                    <span>{formatFileSize(image.size)}</span>
-                    <Badge variant="outline" className="text-xs">
+                  <div className="flex flex-col gap-y-1 items-center justify-between text-xs">
+                    <Badge variant="default" className="text-xs text-black">
                       {image.type.split("/")[1].toUpperCase()}
                     </Badge>
+                    <span>{formatFileSize(image.size)}</span>
                   </div>
                 </div>
               </CardContent>
@@ -207,7 +207,7 @@ export function ImageGalleryDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-4xl max-h-[80vh] overflow-hidden">
+      <DialogContent className="max-w-4xl max-h-[80vh] overflow-hidden bg-black">
         <DialogHeader>
           <DialogTitle>Select Image</DialogTitle>
         </DialogHeader>

@@ -11,10 +11,7 @@ const CategorySchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  description: {
-    type: String,
-    trim: true
-  },
+
   image: {
     type: String,
     trim: true

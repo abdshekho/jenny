@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
+
 import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
@@ -154,11 +154,11 @@ export function CategoryManager() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           { categories.map((category,index) => (
-          <Card key={index} className="bg-card">
+          <Card key={index} className="bg-black/20">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg text-card-foreground">{category.titlePrimary}</CardTitle>
-                <Badge variant={category.isActive ? "default" : "secondary"}>
+                <CardTitle className="text-lg text-primary">{category.titlePrimary}</CardTitle>
+                <Badge variant={category.isActive ? "default" : "destructive"}>
                   {category.isActive ? "Active" : "Inactive"}
                 </Badge>
               </div>
@@ -179,8 +179,6 @@ export function CategoryManager() {
                   />
                 </div>
               )}
-
-              {category.description && <p className="text-sm text-card-foreground">{category.description}</p>}
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -232,7 +230,6 @@ function CategoryForm({
   const [formData, setFormData] = useState({
     titlePrimary: category?.titlePrimary || "",
     titleSecondary: category?.titleSecondary || "",
-    description: category?.description || "",
     image: category?.image || "",
   })
 
@@ -267,16 +264,7 @@ function CategoryForm({
         </div>
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="description">Description</Label>
-        <Textarea
-          id="description"
-          value={formData.description}
-          onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
-          placeholder="Brief description of the category"
-          rows={3}
-        />
-      </div>
+
 
       <div className="space-y-2">
         <Label>Category Image</Label>

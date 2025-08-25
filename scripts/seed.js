@@ -45,7 +45,6 @@ const categories = [
   {
     titlePrimary: "Appetizers",
     titleSecondary: "المقبلات",
-    description: "Start your meal with our delicious appetizers",
     image: "/images/categories/appetizers.jpg",
     order: 1,
     isActive: true
@@ -53,7 +52,6 @@ const categories = [
   {
     titlePrimary: "Main Courses",
     titleSecondary: "الأطباق الرئيسية",
-    description: "Our signature main dishes",
     image: "/images/categories/mains.jpg",
     order: 2,
     isActive: true
@@ -61,7 +59,6 @@ const categories = [
   {
     titlePrimary: "Desserts",
     titleSecondary: "الحلويات",
-    description: "Sweet endings to your meal",
     image: "/images/categories/desserts.jpg",
     order: 3,
     isActive: true
@@ -69,7 +66,6 @@ const categories = [
   {
     titlePrimary: "Beverages",
     titleSecondary: "المشروبات",
-    description: "Refreshing drinks and hot beverages",
     image: "/images/categories/beverages.jpg",
     order: 4,
     isActive: true
@@ -99,7 +95,7 @@ async function seedDatabase() {
       titlePrimary: "Hummus Plate",
       titleSecondary: "طبق الحمص",
       description: "Creamy hummus served with fresh vegetables and pita bread",
-      ingredients: ["chickpeas", "tahini", "olive oil", "garlic", "lemon juice"],
+
       price: 12.99,
       image: "/images/products/hummus.jpg",
       isActive: true,
@@ -115,7 +111,7 @@ async function seedDatabase() {
       titlePrimary: "Stuffed Grape Leaves",
       titleSecondary: "ورق العنب المحشي",
       description: "Traditional grape leaves stuffed with rice and herbs",
-      ingredients: ["grape leaves", "rice", "tomatoes", "onions", "herbs", "olive oil"],
+
       price: 15.99,
       image: "/images/products/grape-leaves.jpg",
       isActive: true,
@@ -131,7 +127,7 @@ async function seedDatabase() {
       titlePrimary: "Grilled Chicken Shawarma",
       titleSecondary: "شاورما الدجاج المشوي",
       description: "Tender grilled chicken with garlic sauce and vegetables",
-      ingredients: ["chicken breast", "garlic sauce", "lettuce", "tomatoes", "pickles", "pita bread"],
+
       price: 18.99,
       originalPrice: 22.99,
       image: "/images/products/chicken-shawarma.jpg",
@@ -147,7 +143,6 @@ async function seedDatabase() {
       titlePrimary: "Lamb Kabsa",
       titleSecondary: "كبسة اللحم",
       description: "Traditional spiced rice with tender lamb",
-      ingredients: ["basmati rice", "lamb", "onions", "tomatoes", "kabsa spices", "almonds"],
       price: 24.99,
       image: "/images/products/lamb-kabsa.jpg",
       isActive: true,
@@ -163,7 +158,7 @@ async function seedDatabase() {
       titlePrimary: "Baklava",
       titleSecondary: "البقلاوة",
       description: "Layers of phyllo pastry with nuts and honey",
-      ingredients: ["phyllo pastry", "pistachios", "walnuts", "honey", "butter"],
+
       price: 8.99,
       image: "/images/products/baklava.jpg",
       isActive: true,
@@ -180,7 +175,7 @@ async function seedDatabase() {
       titlePrimary: "Fresh Orange Juice",
       titleSecondary: "عصير البرتقال الطازج",
       description: "Freshly squeezed orange juice",
-      ingredients: ["fresh oranges"],
+
       price: 6.99,
       image: "/images/products/orange-juice.jpg",
       isActive: true,

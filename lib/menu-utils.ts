@@ -18,15 +18,14 @@ export class MenuService {
     return products.filter((product) => product.isFeatured && product.isActive).sort((a, b) => a.order - b.order)
   }
 
-  // Search products by title or ingredients
+  // Search products by title
   static searchProducts(products: Product[], query: string): Product[] {
     const searchTerm = query.toLowerCase()
     return products.filter(
       (product) =>
         product.isActive &&
         (product.titlePrimary.toLowerCase().includes(searchTerm) ||
-          product.titleSecondary.toLowerCase().includes(searchTerm) ||
-          product.ingredients.some((ingredient) => ingredient.toLowerCase().includes(searchTerm))),
+          product.titleSecondary.toLowerCase().includes(searchTerm)),
     )
   }
 

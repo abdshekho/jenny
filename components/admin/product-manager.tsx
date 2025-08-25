@@ -20,7 +20,6 @@ import type { Product, Category } from "@/lib/types"
 import { Plus, Edit, Trash2, Star, Loader2 } from "lucide-react"
 import { ImageIcon } from "lucide-react"
 import { toast } from "sonner"
-import Image from "next/image"
 
 export function ProductManager() {
   const [products, setProducts] = useState<Product[]>([])
@@ -182,7 +181,7 @@ export function ProductManager() {
       <div className="flex gap-4 items-center">
         <Label htmlFor="category-filter">Filter by Category:</Label>
         <Select value={ selectedCategory } onValueChange={ setSelectedCategory }>
-          <SelectTrigger className="w-48">
+          <SelectTrigger className="w-60">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -214,17 +213,17 @@ export function ProductManager() {
                         { product.isFeatured && <Star className="h-4 w-4 text-accent fill-current" /> }
                       </CardTitle>
                       <p className="text-sm ">{ product.titleSecondary }</p>
-                    
+
                     </div>
                     <div className="flex flex-col items-center">
                       <Badge variant="outline" className="text-xs bg-black">
                         { category?.titlePrimary }
                       </Badge>
                       <Badge variant={ product.isActive ? "default" : "secondary" } className="mt-1">
-                      { product.isActive ? "Active" : "Inactive" }
-                    </Badge>
+                        { product.isActive ? "Active" : "Inactive" }
+                      </Badge>
                     </div>
-                    
+
                   </div>
                 </CardHeader>
 
@@ -282,15 +281,7 @@ export function ProductManager() {
                     <p className="text-sm text-card-foreground line-clamp-2">{ product.description }</p>
                   ) }
 
-                  { product.ingredients.length > 0 && (
-                    <div>
-                      <p className="text-xs text-muted-foreground mb-1">Ingredients:</p>
-                      <p className="text-sm text-card-foreground">
-                        { product.ingredients.slice(0, 3).join(", ") }
-                        { product.ingredients.length > 3 && "..." }
-                      </p>
-                    </div>
-                  ) }
+
 
                   <div className="flex items-center justify-between pt-2">
                     <div className="flex items-center gap-4">
@@ -353,7 +344,7 @@ function ProductForm({
     titlePrimary: product?.titlePrimary || "",
     titleSecondary: product?.titleSecondary || "",
     description: product?.description || "",
-    ingredients: product?.ingredients.join(", ") || "",
+
     price: product?.price || 0,
     originalPrice: product?.originalPrice || 0,
     image: product?.image || "",
@@ -361,14 +352,8 @@ function ProductForm({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const ingredients = formData.ingredients
-      .split(",")
-      .map((ing) => ing.trim())
-      .filter((ing) => ing.length > 0)
-
     onSave({
       ...formData,
-      ingredients,
       originalPrice: formData.originalPrice || undefined,
     })
   }
@@ -395,17 +380,7 @@ function ProductForm({
           </Select>
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="price">Price</Label>
-          <Input
-            id="price"
-            type="number"
-            step="0.01"
-            value={ formData.price }
-            onChange={ (e) => setFormData((prev) => ({ ...prev, price: Number.parseFloat(e.target.value) || 0 })) }
-            required
-          />
-        </div>
+
       </div>
 
       <div className="grid grid-cols-2 gap-4">
@@ -443,24 +418,26 @@ function ProductForm({
         />
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="ingredients">Ingredients (comma-separated)</Label>
-        <Textarea
-          id="ingredients"
-          value={ formData.ingredients }
-          onChange={ (e) => setFormData((prev) => ({ ...prev, ingredients: e.target.value })) }
-          placeholder="chicken, lettuce, tomatoes, sauce"
-          rows={ 2 }
-        />
-      </div>
+
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="originalPrice">Original Price (optional)</Label>
+          <Label htmlFor="price">Price</Label>
+          <Input
+            id="price"
+            type="number"
+            step="1000"
+            value={ formData.price }
+            onChange={ (e) => setFormData((prev) => ({ ...prev, price: Number.parseFloat(e.target.value) || 0 })) }
+            required
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="originalPrice">Old Price (optional)</Label>
           <Input
             id="originalPrice"
             type="number"
-            step="0.01"
+            step="1000"
             value={ formData.originalPrice }
             onChange={ (e) =>
               setFormData((prev) => ({ ...prev, originalPrice: Number.parseFloat(e.target.value) || 0 }))
@@ -478,7 +455,7 @@ function ProductForm({
               onSelect={ (url) => setFormData((prev) => ({ ...prev, image: url })) }
               selectedUrl={ formData.image }
             >
-              <Button type="button" variant="outline" size="sm">
+              <Button type="button" variant="outline" size="sm" className="text-black">
                 <ImageIcon className="h-4 w-4 mr-2" />
                 Choose from Gallery
               </Button>
@@ -489,11 +466,11 @@ function ProductForm({
 
 
       <div className="flex gap-2 pt-4">
-        <Button type="submit" className="flex-1 bg-primary text-primary-foreground" disabled={ saving }>
+        <Button type="submit" className="flex-1 bg-primary text-black" disabled={ saving }>
           { saving && <Loader2 className="h-4 w-4 mr-2 animate-spin" /> }
           { product ? "Update" : "Create" } Product
         </Button>
-        <Button type="button" variant="outline" onClick={ onCancel } disabled={ saving }>
+        <Button type="button" variant="outline" className="text-black" onClick={ onCancel } disabled={ saving }>
           Cancel
         </Button>
       </div>

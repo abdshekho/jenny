@@ -263,10 +263,10 @@ export function ImageUpload({
               </div>
             ) : (
               <>
-                <ImageIcon className="h-12 w-12 mx-auto text-muted-foreground" />
+                <ImageIcon className="h-12 w-12 mx-auto" />
                 <div className="space-y-2">
-                  <p className="text-lg font-medium">Upload an image</p>
-                  <p className="text-sm text-muted-foreground">Drag and drop an image here, or click to select</p>
+                  <p className="text-lg font-medium text-black">Upload an image</p>
+                  <p className="text-sm">Drag and drop an image here, or click to select</p>
                 </div>
 
                 <div className="flex flex-wrap gap-2 justify-center">

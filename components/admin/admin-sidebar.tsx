@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { LayoutDashboard, FolderOpen, Package, Eye, Settings, ChefHat } from "lucide-react"
+import Image from "next/image"
 
 interface AdminSidebarProps {
   currentView: string
@@ -39,11 +40,12 @@ const sidebarItems = [
 
 export function AdminSidebar({ currentView, onViewChange }: AdminSidebarProps) {
   return (
-    <div className="w-64 bg-sidebar border-r border-sidebar-border">
+    <div className="w-64 bg-black/60 border-r border-sidebar-border">
       <div className="p-6">
-        <div className="flex items-center gap-2 mb-8">
-          <ChefHat className="h-8 w-8 text-sidebar-primary" />
-          <h1 className="text-xl font-bold text-sidebar-foreground">Menu Admin</h1>
+        <div className="mb-8">
+            <Image src={ 'logo2.png' } alt="logo" width={ 200 } height={ 200 } />
+          {/* <ChefHat className="h-8 w-8 text-sidebar-primary" /> */}
+          {/* <h1 className="text-xl font-bold text-white">Menu Admin</h1> */}
         </div>
 
         <nav className="space-y-2">
@@ -56,8 +58,8 @@ export function AdminSidebar({ currentView, onViewChange }: AdminSidebarProps) {
                 className={cn(
                   "w-full justify-start gap-3 h-12",
                   currentView === item.id
-                    ? "bg-sidebar-primary text-sidebar-primary-foreground"
-                    : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                    ? "bg-primary text-black"
+                    : "text-white hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                 )}
                 onClick={() => onViewChange(item.id)}
               >

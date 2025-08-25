@@ -2,7 +2,6 @@ export interface Category {
   _id: string
   titlePrimary: string // Main language title
   titleSecondary: string // Secondary language title
-  description?: string
   image?: string
   order: number
   isActive: boolean
@@ -16,7 +15,7 @@ export interface Product {
   titlePrimary: string // Main language title
   titleSecondary: string // Secondary language title
   description?: string
-  ingredients: string[] // Array of ingredients like ["lettuce", "sauce", "cheese"]
+
   price: number
   originalPrice?: number // For discounted items
   image?: string
