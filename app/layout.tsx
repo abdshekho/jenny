@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next"
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { ServiceWorkerRegistration } from "@/components/pwa/service-worker-registration"
+import { CartProvider } from "@/lib/cart-context"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -109,8 +110,10 @@ html {
         `}</style>
       </head>
       <body>
-        {children}
-        <ServiceWorkerRegistration />
+        <CartProvider>
+          {children}
+          <ServiceWorkerRegistration />
+        </CartProvider>
       </body>
     </html>
   )

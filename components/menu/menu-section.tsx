@@ -1,9 +1,11 @@
 "use client"
 
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { MenuService } from "@/lib/menu-utils"
+import { useCart } from "@/lib/cart-context"
 import type { Category, Product } from "@/lib/types"
-import { Star, Clock, Leaf } from "lucide-react"
+import { Star, Clock, Leaf, Plus } from "lucide-react"
 
 interface MenuSectionProps {
   category: Category
@@ -11,7 +13,13 @@ interface MenuSectionProps {
 }
 
 export function MenuSection({ category, products }: MenuSectionProps) {
+  const { dispatch } = useCart()
+  
   if (products.length === 0) return null
+
+  const addToCart = (product: Product) => {
+    dispatch({ type: 'ADD_ITEM', payload: product })
+  }
 
   return (
     <section className="space-y-6">
@@ -107,6 +115,16 @@ export function MenuSection({ category, products }: MenuSectionProps) {
                     ) }
                   </div> */}
 
+                  {/* Add to Cart Button */ }
+                  <Button 
+                    onClick={() => addToCart(product)}
+                    size="sm"
+                    className="bg-primary hover:bg-primary/90"
+                  >
+                    <Plus className="h-4 w-4 mr-1" />
+                    Add to Cart
+                  </Button>
+                  
                   {/* Price with Original Price */ }
                   <div className="text-right">
                     { product.originalPrice && (
