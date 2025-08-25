@@ -1,17 +1,18 @@
 "use client"
 
 import { ChefHat, Clock, MapPin } from "lucide-react"
+import Image from "next/image"
 
 export function MenuHeader() {
   return (
-    <header className="bg-primary text-primary-foreground">
+    <header className="text-white">
       <div className="container mx-auto px-4 py-8">
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-3">
-            <ChefHat className="h-12 w-12" />
+          <Image src={ 'logo2.png' } alt="logo" width={ 200 } height={ 200 } />
+            {/* <Image src={ 'logo.jpg' } alt="logo" width={ 60 } height={ 60 } /> */}
             <div>
-              <h1 className="text-4xl font-bold">Al Baik Restaurant</h1>
-              <p className="text-xl opacity-90">مطعم البيك</p>
+              {/* <h1 className="text-4xl font-bold">JENNY'S BURGER</h1> */}
             </div>
           </div>
 
@@ -21,12 +22,12 @@ export function MenuHeader() {
 
           <div className="flex items-center justify-center gap-8 text-sm opacity-80">
             <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4" />
+              <Clock className="h-4 w-4 text-primary" />
               <span>Open: 11:00 AM - 11:00 PM</span>
             </div>
             <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4" />
-              <span>Riyadh, Saudi Arabia</span>
+              <MapPin className="h-4 w-4 text-primary" />
+              <span>Damascus - Kassaa</span>
             </div>
           </div>
         </div>

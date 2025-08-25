@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -13,47 +13,106 @@ import { Switch } from "@/components/ui/switch"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { ImageUpload } from "@/components/admin/image-upload"
 import { ImageGalleryDialog } from "@/components/admin/image-gallery"
-import { mockCategories } from "@/lib/mock-data"
+import { apiClient } from "@/lib/api-client"
 import type { Category } from "@/lib/types"
-import { Plus, Edit, Trash2, ImageIcon } from "lucide-react"
+import { Plus, Edit, Trash2, ImageIcon, Loader2 } from "lucide-react"
+import { toast } from "sonner"
 
 export function CategoryManager() {
-  const [categories, setCategories] = useState<Category[]>(mockCategories)
+  const [categories, setCategories] = useState<Category[]>([])
   const [editingCategory, setEditingCategory] = useState<Category | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
 
-  const handleSaveCategory = (categoryData: Partial<Category>) => {
-    if (editingCategory) {
-      // Update existing category
-      setCategories((prev) =>
-        prev.map((cat) => (cat.id === editingCategory.id ? { ...cat, ...categoryData, updatedAt: new Date() } : cat)),
-      )
-    } else {
-      // Create new category
-      const newCategory: Category = {
-        id: Date.now().toString(),
-        titlePrimary: categoryData.titlePrimary || "",
-        titleSecondary: categoryData.titleSecondary || "",
-        description: categoryData.description || "",
-        image: categoryData.image || "",
-        order: categories.length + 1,
-        isActive: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+  useEffect(() => {
+    loadCategories()
+    console.log('tttttttttttttt',categories);
+  }, [])
+
+  const loadCategories = async () => {
+    try {
+      setLoading(true)
+      const response = await apiClient.getCategories()
+      if (response.success) {
+        setCategories(response.data)
+      } else {
+        toast.error('Failed to load categories')
       }
-      setCategories((prev) => [...prev, newCategory])
+    } catch (error) {
+      toast.error('Error loading categories')
+    } finally {
+      setLoading(false)
     }
-
-    setEditingCategory(null)
-    setIsDialogOpen(false)
   }
 
-  const handleDeleteCategory = (id: string) => {
-    setCategories((prev) => prev.filter((cat) => cat.id !== id))
+  const handleSaveCategory = async (categoryData: Partial<Category>) => {
+    try {
+      setSaving(true)
+      if (editingCategory) {
+        // Update existing category
+        const response = await apiClient.updateCategory(editingCategory._id, categoryData)
+        if (response.success) {
+          setCategories((prev) =>
+            prev.map((cat) => (cat._id === editingCategory._id ? response.data : cat))
+          )
+          toast.success('Category updated successfully')
+        } else {
+          toast.error('Failed to update category')
+          return
+        }
+      } else {
+        // Create new category
+        const response = await apiClient.createCategory(categoryData as Omit<Category, 'id' | 'createdAt' | 'updatedAt'>)
+        if (response.success) {
+          setCategories((prev) => [...prev, response.data])
+          toast.success('Category created successfully')
+        } else {
+          toast.error('Failed to create category')
+          return
+        }
+      }
+
+      setEditingCategory(null)
+      setIsDialogOpen(false)
+    } catch (error) {
+      toast.error('Error saving category')
+    } finally {
+      setSaving(false)
+    }
   }
 
-  const toggleCategoryStatus = (id: string) => {
-    setCategories((prev) => prev.map((cat) => (cat.id === id ? { ...cat, isActive: !cat.isActive } : cat)))
+  const handleDeleteCategory = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this category?')) return
+    
+    try {
+      const response = await apiClient.deleteCategory(id)
+      if (response.success) {
+        setCategories((prev) => prev.filter((cat) => cat._id !== id))
+        toast.success('Category deleted successfully')
+      } else {
+        toast.error('Failed to delete category')
+      }
+    } catch (error) {
+      toast.error('Error deleting category')
+    }
+  }
+
+  const toggleCategoryStatus = async (id: string) => {
+    const category = categories.find(cat => cat._id === id)
+    if (!category) return
+    
+    try {
+      const response = await apiClient.updateCategory(id, { isActive: !category.isActive })
+      if (response.success) {
+        setCategories((prev) => prev.map((cat) => (cat._id === id ? response.data : cat)))
+        toast.success(`Category ${response.data.isActive ? 'activated' : 'deactivated'}`)
+      } else {
+        toast.error('Failed to update category status')
+      }
+    } catch (error) {
+      toast.error('Error updating category status')
+    }
   }
 
   return (
@@ -74,7 +133,7 @@ export function CategoryManager() {
               Add Category
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-black">
             <DialogHeader>
               <DialogTitle>{editingCategory ? "Edit Category" : "Add New Category"}</DialogTitle>
             </DialogHeader>
@@ -82,14 +141,20 @@ export function CategoryManager() {
               category={editingCategory}
               onSave={handleSaveCategory}
               onCancel={() => setIsDialogOpen(false)}
+              saving={saving}
             />
           </DialogContent>
         </Dialog>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {categories.map((category) => (
-          <Card key={category.id} className="bg-card">
+      {loading ? (
+        <div className="flex justify-center items-center py-12">
+          <Loader2 className="h-8 w-8 animate-spin" />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          { categories.map((category,index) => (
+          <Card key={index} className="bg-card">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-lg text-card-foreground">{category.titlePrimary}</CardTitle>
@@ -119,7 +184,7 @@ export function CategoryManager() {
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Switch checked={category.isActive} onCheckedChange={() => toggleCategoryStatus(category.id)} />
+                  <Switch checked={category.isActive} onCheckedChange={() => toggleCategoryStatus(category._id)} />
                   <span className="text-sm text-muted-foreground">Active</span>
                 </div>
 
@@ -137,7 +202,7 @@ export function CategoryManager() {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => handleDeleteCategory(category.id)}
+                    onClick={() => handleDeleteCategory(category._id)}
                     className="text-destructive hover:text-destructive"
                   >
                     <Trash2 className="h-4 w-4" />
@@ -146,8 +211,9 @@ export function CategoryManager() {
               </div>
             </CardContent>
           </Card>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
@@ -156,10 +222,12 @@ function CategoryForm({
   category,
   onSave,
   onCancel,
+  saving,
 }: {
   category: Category | null
   onSave: (data: Partial<Category>) => void
   onCancel: () => void
+  saving: boolean
 }) {
   const [formData, setFormData] = useState({
     titlePrimary: category?.titlePrimary || "",
@@ -219,8 +287,8 @@ function CategoryForm({
               onSelect={(url) => setFormData((prev) => ({ ...prev, image: url }))}
               selectedUrl={formData.image}
             >
-              <Button type="button" variant="outline" size="sm">
-                <ImageIcon className="h-4 w-4 mr-2" />
+              <Button type="button" variant="outline" size="sm" className="text-black">
+                <ImageIcon className="h-4 w-4 mr-2 text-black" />
                 Choose from Gallery
               </Button>
             </ImageGalleryDialog>
@@ -229,10 +297,11 @@ function CategoryForm({
       </div>
 
       <div className="flex gap-2 pt-4">
-        <Button type="submit" className="flex-1 bg-primary text-primary-foreground">
+        <Button type="submit" className="flex-1 bg-primary text-primary-foreground" disabled={saving}>
+          {saving && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
           {category ? "Update" : "Create"} Category
         </Button>
-        <Button type="button" variant="outline" onClick={onCancel}>
+        <Button type="button" variant="outline" onClick={onCancel} disabled={saving} className="text-black">
           Cancel
         </Button>
       </div>

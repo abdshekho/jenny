@@ -1,5 +1,5 @@
 export interface Category {
-  id: string
+  _id: string
   titlePrimary: string // Main language title
   titleSecondary: string // Secondary language title
   description?: string
@@ -11,7 +11,7 @@ export interface Category {
 }
 
 export interface Product {
-  id: string
+  _id: string
   categoryId: string
   titlePrimary: string // Main language title
   titleSecondary: string // Secondary language title

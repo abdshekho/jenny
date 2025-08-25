@@ -72,13 +72,13 @@ export function AdminDashboard() {
           </CardHeader>
           <CardContent className="space-y-4">
             {activeCategories.slice(0, 4).map((category) => (
-              <div key={category.id} className="flex items-center justify-between">
+              <div key={category._id} className="flex items-center justify-between">
                 <div>
                   <p className="font-medium text-card-foreground">{category.titlePrimary}</p>
                   <p className="text-sm text-muted-foreground">{category.titleSecondary}</p>
                 </div>
                 <Badge variant="secondary">
-                  {MenuService.getProductsByCategory(mockProducts, category.id).length} items
+                  {MenuService.getProductsByCategory(mockProducts, category._id).length} items
                 </Badge>
               </div>
             ))}
@@ -91,7 +91,7 @@ export function AdminDashboard() {
           </CardHeader>
           <CardContent className="space-y-4">
             {featuredProducts.slice(0, 4).map((product) => (
-              <div key={product.id} className="flex items-center justify-between">
+              <div key={product._id} className="flex items-center justify-between">
                 <div>
                   <p className="font-medium text-card-foreground">{product.titlePrimary}</p>
                   <p className="text-sm text-muted-foreground">{product.titleSecondary}</p>

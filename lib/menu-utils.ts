@@ -41,8 +41,9 @@ export class MenuService {
   }
 
   // Format price with currency
-  static formatPrice(price: number, currency = "SAR"): string {
-    return `${price.toFixed(2)} ${currency}`
+  static formatPrice(price: number, currency = "SP"): string {
+    // return `${price.toFixed(2)} ${currency}`
+    return `${price} ${currency}`
   }
 
   // Calculate discounted price

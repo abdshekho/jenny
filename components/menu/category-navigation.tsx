@@ -12,18 +12,18 @@ interface CategoryNavigationProps {
 
 export function CategoryNavigation({ categories, selectedCategory, onCategoryChange }: CategoryNavigationProps) {
   const activeCategories = categories.filter((cat) => cat.isActive).sort((a, b) => a.order - b.order)
-
+  console.log("cccccccccccccccccccc",activeCategories);
   return (
-    <nav className="sticky top-0 z-10 bg-background/95 backdrop-blur-sm border-b border-border">
+    <nav className="sticky top-0 z-10  backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4 py-4">
         <div className="flex gap-2 overflow-x-auto scrollbar-hide">
           <Button
             variant={selectedCategory === "all" ? "default" : "outline"}
             className={cn(
-              "whitespace-nowrap min-w-fit",
+              "whitespace-nowrap min-w-fit text-black",
               selectedCategory === "all"
-                ? "bg-primary text-primary-foreground"
-                : "hover:bg-secondary hover:text-secondary-foreground",
+                ? "bg-primary text-black"
+                : "hover:bg-primary",
             )}
             onClick={() => onCategoryChange("all")}
           >
@@ -32,15 +32,15 @@ export function CategoryNavigation({ categories, selectedCategory, onCategoryCha
 
           {activeCategories.map((category) => (
             <Button
-              key={category.id}
-              variant={selectedCategory === category.id ? "default" : "outline"}
+              key={category._id}
+              variant={selectedCategory === category._id ? "default" : "outline"}
               className={cn(
-                "whitespace-nowrap min-w-fit",
-                selectedCategory === category.id
-                  ? "bg-primary text-primary-foreground"
-                  : "hover:bg-secondary hover:text-secondary-foreground",
+                "whitespace-nowrap min-w-fit text-black",
+                selectedCategory === category._id
+                  ? "bg-primary"
+                  : "hover:bg-primary",
               )}
-              onClick={() => onCategoryChange(category.id)}
+              onClick={() => onCategoryChange(category._id)}
             >
               <span className="block">{category.titlePrimary}</span>
             </Button>

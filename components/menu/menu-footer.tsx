@@ -13,7 +13,7 @@ export function MenuFooter() {
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <MapPin className="h-4 w-4 text-sidebar-primary" />
-                <span className="text-sm">King Fahd Road, Riyadh 12345, Saudi Arabia</span>
+                <span className="text-sm">Syria - Damascus - Kassaa</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-sidebar-primary" />

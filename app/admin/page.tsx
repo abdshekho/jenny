@@ -31,7 +31,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="flex h-screen bg-background">
+    <div className="flex h-screen">
       <AdminSidebar currentView={currentView} onViewChange={setCurrentView} />
       <main className="flex-1 overflow-auto">
         <div className="p-6">{renderCurrentView()}</div>

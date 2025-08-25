@@ -26,7 +26,7 @@ export function MenuPreview() {
 
       <div className="space-y-8">
         {menuData.map(({ category, products }) => (
-          <div key={category.id} className="space-y-4">
+          <div key={category._id} className="space-y-4">
             <div className="border-b border-border pb-2">
               <h2 className="text-2xl font-bold text-foreground">{category.titlePrimary}</h2>
               <p className="text-lg text-muted-foreground">{category.titleSecondary}</p>
@@ -35,7 +35,7 @@ export function MenuPreview() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {products.map((product) => (
-                <Card key={product.id} className="bg-card hover:shadow-md transition-shadow">
+                <Card key={product._id} className="bg-card hover:shadow-md transition-shadow">
                   <CardContent className="p-4">
                     <div className="flex justify-between items-start mb-2">
                       <div className="flex-1">

@@ -1,43 +1,78 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { MenuHeader } from "@/components/menu/menu-header"
 import { CategoryNavigation } from "@/components/menu/category-navigation"
 import { MenuSection } from "@/components/menu/menu-section"
 import { MenuFooter } from "@/components/menu/menu-footer"
 import { InstallPrompt } from "@/components/pwa/install-prompt"
-import { mockCategories, mockProducts } from "@/lib/mock-data"
 import { MenuService } from "@/lib/menu-utils"
+import type { Category, Product } from "@/lib/types"
+import { Loader2 } from "lucide-react"
 
 export default function MenuPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
-  const menuData = MenuService.groupProductsByCategory(mockCategories, mockProducts)
-  const featuredProducts = MenuService.getFeaturedProducts(mockProducts)
+  const [categories, setCategories] = useState<Category[]>([])
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    loadMenuData()
+  }, [])
+
+  const loadMenuData = async () => {
+    try {
+      setLoading(true)
+      const response = await fetch('/api/menu')
+      const result = await response.json()
+      
+      if (result.success) {
+        setCategories(result.data.categories)
+        setProducts(result.data.products)
+      }
+    } catch (error) {
+      console.error('Error loading menu data:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const menuData = MenuService.groupProductsByCategory(categories, products)
+  const featuredProducts = MenuService.getFeaturedProducts(products)
 
   const filteredMenuData =
-    selectedCategory === "all" ? menuData : menuData.filter(({ category }) => category.id === selectedCategory)
+    selectedCategory === "all" ? menuData : menuData.filter(({ category }) => category._id === selectedCategory)
+
+  console.log('🚀 ~ page.tsx ~ MenuPage ~ filteredMenuData:', filteredMenuData);
+
+
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <MenuHeader />
 
       <CategoryNavigation
-        categories={mockCategories}
+        categories={categories}
         selectedCategory={selectedCategory}
         onCategoryChange={setSelectedCategory}
       />
 
-      <main className="container mx-auto px-4 py-8 space-y-12">
+      {loading ? (
+        <div className="flex justify-center items-center py-20">
+          <Loader2 className="h-8 w-8 animate-spin" />
+        </div>
+      ) : (
+        <main className="container mx-auto px-4 py-8 space-y-12">
         {/* Featured Items Section */}
         {selectedCategory === "all" && featuredProducts.length > 0 && (
           <section className="space-y-6">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold text-foreground mb-2">Chef's Specials</h2>
+            <div className="text-center flex flex-col items-center">
+              <h2 className="text-3xl font-bold text-black bg-primary py-2 px-4">Chef's Specials</h2>
               <p className="text-muted-foreground">Our most popular dishes</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredProducts.slice(0, 6).map((product) => (
-                <div key={product.id} className="group">
+              {featuredProducts && featuredProducts.length > 0 ?( featuredProducts.slice(0, 6).map((product) => (
+                <div key={product._id} className="group">
                   <div className="bg-card rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                     <div className="aspect-video bg-muted relative overflow-hidden">
                       <img
@@ -63,16 +98,17 @@ export default function MenuPage() {
                     </div>
                   </div>
                 </div>
-              ))}
+              ))):<div></div>}
             </div>
           </section>
         )}
 
-        {/* Menu Sections */}
-        {filteredMenuData.map(({ category, products }) => (
-          <MenuSection key={category.id} category={category} products={products} />
-        ))}
-      </main>
+          {/* Menu Sections */}
+          {filteredMenuData.map(({ category, products }) => (
+            <MenuSection key={category._id} category={category} products={products} />
+          ))}
+        </main>
+      )}
 
       <MenuFooter />
 
