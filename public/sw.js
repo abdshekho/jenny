@@ -234,7 +234,7 @@ async function handleNavigationRequest(request) {
       `<!DOCTYPE html>
       <html>
         <head>
-          <title>Offline - Al Baik Menu</title>
+          <title>Offline - Jenny's Burger Menu</title>
           <meta name="viewport" content="width=device-width, initial-scale=1">
           <style>
             body { 
@@ -379,7 +379,7 @@ self.addEventListener("push", (event) => {
     ],
   }
 
-  event.waitUntil(self.registration.showNotification("Al Baik Menu", options))
+  event.waitUntil(self.registration.showNotification("Jenny's Burger Menu", options))
 })
 
 // Handle notification clicks

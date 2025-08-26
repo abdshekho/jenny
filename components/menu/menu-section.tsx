@@ -31,7 +31,7 @@ export function MenuSection({ category, products }: MenuSectionProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         { products.map((product) => (
-          <div key={ product._id } className="group cursor-pointer">
+          <div key={ product._id } className="group">
             <div className="bg-black/50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
               {/* Product Image */ }
               <div className="aspect-video bg-black/50 relative overflow-hidden">
@@ -119,7 +119,7 @@ export function MenuSection({ category, products }: MenuSectionProps) {
                   <Button 
                     onClick={() => addToCart(product)}
                     size="sm"
-                    className="bg-primary hover:bg-primary/90"
+                    className="bg-primary hover:bg-primary/90 cursor-pointer"
                   >
                     <Plus className="h-4 w-4 mr-1" />
                     Add to Cart

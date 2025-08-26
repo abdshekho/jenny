@@ -54,7 +54,7 @@ export function InstallPrompt() {
       <CardContent className="p-4">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
-            <h3 className="font-semibold text-card-foreground mb-1">Install Al Baik Menu</h3>
+            <h3 className="font-semibold text-card-foreground mb-1">Install Jenny's Burger Menu</h3>
             <p className="text-sm text-muted-foreground mb-3">
               Add to your home screen for quick access and offline viewing
             </p>

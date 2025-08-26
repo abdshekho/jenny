@@ -27,29 +27,29 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    siteName: "Al Baik Restaurant Menu",
-    title: "Al Baik Restaurant Menu",
-    description: "Digital menu for Al Baik Restaurant - Browse our delicious dishes and specials",
+    siteName: "Jenny's Burger Restaurant Menu",
+    title: "Jenny's Burger Restaurant Menu",
+    description: "Digital menu for Jenny's Burger Restaurant - Browse our delicious dishes and specials",
     url: "https://albaik-menu.vercel.app",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Al Baik Restaurant Menu",
+        alt: "Jenny's Burger Restaurant Menu",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Al Baik Restaurant Menu",
-    description: "Digital menu for Al Baik Restaurant - Browse our delicious dishes and specials",
+    title: "Jenny's Burger Restaurant Menu",
+    description: "Digital menu for Jenny's Burger Restaurant - Browse our delicious dishes and specials",
     images: ["/og-image.png"],
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Al Baik Menu",
+    title: "Jenny's Burger Menu",
     startupImage: [
       "/apple-touch-startup-image-768x1004.png",
       {
@@ -91,7 +91,7 @@ export default function RootLayout({
         {/* Apple-specific meta tags */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Al Baik Menu" />
+        <meta name="apple-mobile-web-app-title" content="Jenny's Burger Menu" />
 
         {/* Microsoft-specific meta tags */}
         <meta name="msapplication-TileColor" content="#15803d" />
@@ -99,7 +99,7 @@ export default function RootLayout({
 
         {/* Additional PWA meta tags */}
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="application-name" content="Al Baik Menu" />
+        <meta name="application-name" content="Jenny's Burger Menu" />
 
         <style>{`
 html {
