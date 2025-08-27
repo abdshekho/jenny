@@ -11,6 +11,7 @@ import type { Category, Product } from "@/lib/types"
 import { LayoutGrid, List, ListOrdered, Loader2 } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { LanguageToggle } from "@/components/ui/language-toggle"
 
 export default function MenuPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
@@ -28,7 +29,7 @@ export default function MenuPage() {
       setLoading(true)
       const response = await fetch('/api/menu')
       const result = await response.json()
-      
+
       if (result.success) {
         setCategories(result.data.categories)
         setProducts(result.data.products)
@@ -46,8 +47,6 @@ export default function MenuPage() {
   const filteredMenuData =
     selectedCategory === "all" ? menuData : menuData.filter(({ category }) => category._id === selectedCategory)
 
-  console.log('🚀 ~ page.tsx ~ MenuPage ~ filteredMenuData:', filteredMenuData);
-
 
 
   return (
@@ -55,22 +54,22 @@ export default function MenuPage() {
       <MenuHeader />
 
       <CategoryNavigation
-        categories={categories}
-        selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
+        categories={ categories }
+        selectedCategory={ selectedCategory }
+        onCategoryChange={ setSelectedCategory }
       />
 
-      {loading ? (
+      { loading ? (
         <div className="flex justify-center items-center py-20">
           <div className="logo-loader">
-                      <Image src={ 'logo2.png' } alt="logo" width={ 200 } height={ 200 } />
+            <Image src={ 'logo2.png' } alt="logo" width={ 200 } height={ 200 } />
           </div>
-          {/* <Loader2 className="h-8 w-8 animate-spin" /> */}
+          {/* <Loader2 className="h-8 w-8 animate-spin" /> */ }
         </div>
       ) : (
         <main className="container mx-auto px-4 py-8 space-y-12">
-        {/* Featured Items Section */}
-        {/* {selectedCategory === "all" && featuredProducts.length > 0 && (
+          {/* Featured Items Section */ }
+          {/* {selectedCategory === "all" && featuredProducts.length > 0 && (
           <section className="space-y-6">
             <div className="text-center flex flex-col items-center">
               <h2 className="text-3xl font-bold text-black bg-primary py-2 px-4">Chef's Specials</h2>
@@ -109,24 +108,29 @@ export default function MenuPage() {
           </section>
         )} */}
 
-          {/* View Toggle Button */}
-          <div className="fixed bottom-10 right-3 z-20">
+          {/* View Toggle Button */ }
+          <div className="flex flex-col gap-2 fixed bottom-10 right-3 z-20">
+            <LanguageToggle
+              className="bg-white/20 text-black rounded-lg hover:bg-primary/90 transition-colors"
+            />
             <Button
               variant="outline"
               size="lg"
-              onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
+              onClick={ () => setViewMode(viewMode === 'grid' ? 'list' : 'grid') }
               className="bg-white text-black px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors"
             >
-              {viewMode === 'list' ? <LayoutGrid className="h-5 w-5"/>: <List className="h-5 w-5"/> }
+              { viewMode === 'list' ? <LayoutGrid className="h-5 w-5" /> : <List className="h-5 w-5" /> }
             </Button>
+
           </div>
 
-          {/* Menu Sections */}
-          {filteredMenuData.map(({ category, products }) => (
-            <MenuSection key={category._id} category={category} products={products} viewMode={viewMode} />
-          ))}
+
+          {/* Menu Sections */ }
+          { filteredMenuData.map(({ category, products }) => (
+            <MenuSection key={ category._id } category={ category } products={ products } viewMode={ viewMode } />
+          )) }
         </main>
-      )}
+      ) }
 
       <MenuFooter />
 

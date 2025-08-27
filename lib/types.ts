@@ -14,6 +14,7 @@ export interface Product {
   titlePrimary: string // Main language title
   titleSecondary: string // Secondary language title
   description?: string
+  descriptionAr?: string
 
   price: number
   originalPrice?: number // For discounted items

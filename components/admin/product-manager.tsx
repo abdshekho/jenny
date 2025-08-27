@@ -281,8 +281,15 @@ export function ProductManager() {
                     </div>
                   </div>
 
-                  { product.description && (
-                    <p className="text-sm text-white line-clamp-2">{ product.description }</p>
+                  { (product.description || product.descriptionAr) && (
+                    <div className="space-y-1">
+                      {product.description && (
+                        <p className="text-sm text-white line-clamp-2">{ product.description }</p>
+                      )}
+                      {product.descriptionAr && (
+                        <p className="text-sm text-white line-clamp-2" dir="rtl">{ product.descriptionAr }</p>
+                      )}
+                    </div>
                   ) }
 
 
@@ -348,6 +355,7 @@ function ProductForm({
     titlePrimary: product?.titlePrimary || "",
     titleSecondary: product?.titleSecondary || "",
     description: product?.description || "",
+    descriptionAr: product?.descriptionAr || "",
 
     price: product?.price || 0,
     originalPrice: product?.originalPrice || 0,
@@ -411,15 +419,28 @@ function ProductForm({
         </div>
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="description">Description</Label>
-        <Textarea
-          id="description"
-          value={ formData.description }
-          onChange={ (e) => setFormData((prev) => ({ ...prev, description: e.target.value })) }
-          placeholder="Brief description of the product"
-          rows={ 3 }
-        />
+      <div className="grid grid-cols-1 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="description">Description (English)</Label>
+          <Textarea
+            id="description"
+            value={ formData.description }
+            onChange={ (e) => setFormData((prev) => ({ ...prev, description: e.target.value })) }
+            placeholder="Brief description of the product in English"
+            rows={ 3 }
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="descriptionAr">Description (Arabic)</Label>
+          <Textarea
+            id="descriptionAr"
+            value={ formData.descriptionAr }
+            onChange={ (e) => setFormData((prev) => ({ ...prev, descriptionAr: e.target.value })) }
+            placeholder="وصف مختصر للمنتج بالعربية"
+            rows={ 3 }
+            dir="rtl"
+          />
+        </div>
       </div>
 
 

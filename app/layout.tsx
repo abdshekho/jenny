@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { ServiceWorkerRegistration } from "@/components/pwa/service-worker-registration"
 import { CartProvider } from "@/lib/cart-context"
+import { LanguageProvider } from "@/lib/language-context"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -110,10 +111,12 @@ html {
         `}</style>
       </head>
       <body>
-        <CartProvider>
-          {children}
-          <ServiceWorkerRegistration />
-        </CartProvider>
+        <LanguageProvider>
+          <CartProvider>
+            {children}
+            <ServiceWorkerRegistration />
+          </CartProvider>
+        </LanguageProvider>
       </body>
     </html>
   )

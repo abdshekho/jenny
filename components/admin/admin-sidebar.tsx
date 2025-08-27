@@ -11,11 +11,11 @@ interface AdminSidebarProps {
 }
 
 const sidebarItems = [
-  {
-    id: "dashboard",
-    label: "Dashboard",
-    icon: LayoutDashboard,
-  },
+  // {
+  //   id: "dashboard",
+  //   label: "Dashboard",
+  //   icon: LayoutDashboard,
+  // },
   {
     id: "categories",
     label: "Categories",
@@ -26,16 +26,16 @@ const sidebarItems = [
     label: "Products",
     icon: Package,
   },
-  {
-    id: "preview",
-    label: "Menu Preview",
-    icon: Eye,
-  },
-  {
-    id: "settings",
-    label: "Settings",
-    icon: Settings,
-  },
+  // {
+  //   id: "preview",
+  //   label: "Menu Preview",
+  //   icon: Eye,
+  // },
+  // {
+  //   id: "settings",
+  //   label: "Settings",
+  //   icon: Settings,
+  // },
 ]
 
 export function AdminSidebar({ currentView, onViewChange }: AdminSidebarProps) {
@@ -44,8 +44,6 @@ export function AdminSidebar({ currentView, onViewChange }: AdminSidebarProps) {
       <div className="p-6">
         <div className="mb-8">
             <Image src={ 'logo2.png' } alt="logo" width={ 200 } height={ 200 } />
-          {/* <ChefHat className="h-8 w-8 text-sidebar-primary" /> */}
-          {/* <h1 className="text-xl font-bold text-white">Menu Admin</h1> */}
         </div>
 
         <nav className="space-y-2">

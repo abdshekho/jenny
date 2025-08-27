@@ -2,31 +2,24 @@
 
 import { useState } from "react"
 import { AdminSidebar } from "@/components/admin/admin-sidebar"
-import { AdminDashboard } from "@/components/admin/admin-dashboard"
+// import { AdminDashboard } from "@/components/admin/admin-dashboard"
 import { CategoryManager } from "@/components/admin/category-manager"
 import { ProductManager } from "@/components/admin/product-manager"
-import { MenuPreview } from "@/components/admin/menu-preview"
-import { AdminSettings } from "@/components/admin/admin-settings"
 
-type AdminView = "dashboard" | "categories" | "products" | "preview" | "settings"
+
+type AdminView = "categories" | "products"
 
 export default function AdminPage() {
-  const [currentView, setCurrentView] = useState<AdminView>("dashboard")
+  const [currentView, setCurrentView] = useState<AdminView>("categories")
 
   const renderCurrentView = () => {
     switch (currentView) {
-      case "dashboard":
-        return <AdminDashboard />
       case "categories":
         return <CategoryManager />
       case "products":
         return <ProductManager />
-      case "preview":
-        return <MenuPreview />
-      case "settings":
-        return <AdminSettings />
       default:
-        return <AdminDashboard />
+        return <CategoryManager />
     }
   }
 

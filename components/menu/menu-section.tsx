@@ -2,8 +2,10 @@
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { LanguageToggle } from "@/components/ui/language-toggle"
 import { MenuService } from "@/lib/menu-utils"
 import { useCart } from "@/lib/cart-context"
+import { useLanguage } from "@/lib/language-context"
 import type { Category, Product } from "@/lib/types"
 import { Star, Clock, Leaf, Plus } from "lucide-react"
 
@@ -15,6 +17,7 @@ interface MenuSectionProps {
 
 export function MenuSection({ category, products, viewMode = 'grid' }: MenuSectionProps) {
   const { dispatch } = useCart()
+  const { isArabic } = useLanguage()
 
   if (products.length === 0) return null
 
@@ -24,9 +27,13 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
 
   return (
     <section className="space-y-6">
-      <div className="text-center space-y-2 flex flex-col items-center">
+      <div className="text-center space-y-2 flex flex-col items-center relative">
         <h2 className="text-3xl font-bold text-black bg-primary py-2 px-4 rounded-sm">{ category.titlePrimary }</h2>
         <p className="text-xl text-muted-foreground">{ category.titleSecondary }</p>
+        {/* Language Toggle Button */}
+        {/* <LanguageToggle 
+          className="absolute top-0 right-0 bg-white/10 hover:bg-white/20 text-white border-white/30"
+        /> */}
         {/* {category.description && <p className="text-muted-foreground max-w-2xl mx-auto">{category.description}</p>} */ }
       </div>
 
@@ -90,9 +97,11 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
                     <p className="text-primary">{ product.titleSecondary }</p>
                   </div>
 
-                  { product.description && (
-                    <p dir="rtl" className={ `text-sm text-white leading-relaxed ${viewMode === 'list' ? 'line-clamp-2 text-center' : 'line-clamp-3'
-                      }` }>{ product.description }</p>
+                  { (product.description || product.descriptionAr) && (
+                    <p dir={isArabic ? "rtl" : "ltr"} className={ `text-sm text-white leading-relaxed ${viewMode === 'list' ? 'line-clamp-2 text-center' : 'line-clamp-3'
+                      }` }>
+                      {isArabic ? (product.descriptionAr || product.description) : (product.description || product.descriptionAr)}
+                    </p>
                   ) }
 
                   {/* Footer Info */ }
