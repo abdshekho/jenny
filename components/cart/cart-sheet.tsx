@@ -50,7 +50,7 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
                     />
                     
                     <div className="flex-1">
-                      <h4 className="font-medium bg-primary text-black">{item.titlePrimary}</h4>
+                      <h4 className="font-medium bg-primary text-black p-0.5 rounded-sm text-center">{item.titlePrimary}</h4>
                       <p className="text-sm text-muted-foreground">{item.titleSecondary}</p>
                       <p className="font-bold text-primary">{MenuService.formatPrice(item.price)}</p>
                     </div>

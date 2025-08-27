@@ -34,10 +34,6 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
-  images: [{
-    type: String,
-    trim: true
-  }],
   isActive: {
     type: Boolean,
     default: true
@@ -46,24 +42,6 @@ const ProductSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  order: {
-    type: Number,
-    default: 0
-  },
-  nutritionInfo: {
-    calories: Number,
-    protein: Number,
-    carbs: Number,
-    fat: Number
-  },
-  allergens: [{
-    type: String,
-    trim: true
-  }],
-  preparationTime: {
-    type: Number,
-    min: 0
-  }
 }, {
   timestamps: true
 })

@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { writeFile, mkdir } from "fs/promises"
 import { join } from "path"
 import { existsSync } from "fs"
+import sharp from "sharp"
 
 export async function POST(request: NextRequest) {
   try {
@@ -35,22 +36,30 @@ export async function POST(request: NextRequest) {
     const extension = file.name.split(".").pop() || "webp"
     const filename = `${timestamp}-${randomString}.${extension}`
 
-    // Convert file to buffer and save
+    // Convert file to buffer
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
 
-    const filepath = join(uploadDir, filename)
-    await writeFile(filepath, buffer)
+    // Compress image using sharp
+    const compressedBuffer = await sharp(buffer)
+      .resize(800, 600, { fit: 'inside', withoutEnlargement: true })
+      .webp({ quality: 70, effort: 6 })
+      .toBuffer()
+
+    // Always save as .webp for better compression
+    const webpFilename = `${timestamp}-${randomString}.webp`
+    const filepath = join(uploadDir, webpFilename)
+    await writeFile(filepath, compressedBuffer)
 
     // Return the public URL
-    const url = `/uploads/${filename}`
+    const url = `/uploads/${webpFilename}`
 
     return NextResponse.json({
       success: true,
       url,
-      filename,
-      size: file.size,
-      type: file.type,
+      filename: webpFilename,
+      size: compressedBuffer.length,
+      type: 'image/webp',
     })
   } catch (error) {
     console.error("Upload error:", error)

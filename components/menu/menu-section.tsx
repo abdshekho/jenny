@@ -25,7 +25,7 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
   return (
     <section className="space-y-6">
       <div className="text-center space-y-2 flex flex-col items-center">
-        <h2 className="text-3xl font-bold text-black bg-primary py-2 px-4">{ category.titlePrimary }</h2>
+        <h2 className="text-3xl font-bold text-black bg-primary py-2 px-4 rounded-sm">{ category.titlePrimary }</h2>
         <p className="text-xl text-muted-foreground">{ category.titleSecondary }</p>
         {/* {category.description && <p className="text-muted-foreground max-w-2xl mx-auto">{category.description}</p>} */ }
       </div>
@@ -33,7 +33,7 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
       <div className={ viewMode === 'grid' ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" : "space-y-4" }>
         { products.map((product) => (
           // <div className="group">
-            <div key={ product._id } className={ `bg-black/50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 ${viewMode === 'list' ? 'flex flex-row relative' : ''
+            <div key={ product._id } className={ `bg-black/50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 ${viewMode === 'list' ? 'flex flex-row relative' : 'flex flex-col h-full'
               }` }>
               {/* Product Image */ }
               <div className={ `bg-black/50 overflow-hidden ${viewMode === 'list' ? 'w-32 h-32 flex-shrink-0' : 'aspect-video relative'
@@ -82,10 +82,10 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
               </div>
 
               {/* Product Info */ }
-              <div className={ viewMode === 'list' ? 'flex-1' : '' }>
+              <div className={ viewMode === 'list' ? 'flex-1' : 'flex flex-col flex-1' }>
                 <h3 className={ `font-bold text-lg  leading-tight text-center ${viewMode === 'list' ? 'px-4 py-2' : 'px-1 py-3 text-card-foreground bg-primary'
                   }` }>{ product.titlePrimary }</h3>
-                <div className={ `text-center ${viewMode === 'list' ? 'px-4 flex flex-col space-y-1' : 'p-4  space-y-3 flex flex-col justify-between'}` }>
+                <div className={ `text-center ${viewMode === 'list' ? 'px-4 flex flex-col space-y-1' : 'p-4 space-y-3 flex flex-col flex-1'}` }>
                   <div>
                     <p className="text-primary">{ product.titleSecondary }</p>
                   </div>
@@ -96,7 +96,7 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
                   ) }
 
                   {/* Footer Info */ }
-                  <div className={ `flex items-center pt-2 ${viewMode === 'list' ? 'justify-between' : 'justify-between'
+                  <div className={ `flex items-center pt-2 mt-auto ${viewMode === 'list' ? 'justify-between' : 'justify-between'
                     }` }>
                     {/* Add to Cart Button */ }
                     { viewMode !== 'list' && <Button

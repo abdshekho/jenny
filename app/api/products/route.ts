@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     await dbConnect()
     const body = await request.json()
     
-    const lastProduct = await Product.findOne({ categoryId: body.categoryId }).sort({ order: -1 })
+    const lastProduct = await Product.findOne({ categoryId: body.categoryId })
     const order = lastProduct ? lastProduct.order + 1 : 1
     
     const product = await Product.create({ ...body, order })

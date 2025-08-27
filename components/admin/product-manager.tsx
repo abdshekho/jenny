@@ -456,7 +456,10 @@ function ProductForm({
           <ImageUpload value={ formData.image } onChange={ (url) => setFormData((prev) => ({ ...prev, image: url })) } />
           <div className="flex gap-2">
             <ImageGalleryDialog
-              onSelect={ (url) => setFormData((prev) => ({ ...prev, image: url })) }
+              onSelect={ (url) => {
+                console.log('Selected image URL:', url)
+                setFormData((prev) => ({ ...prev, image: url }))
+              }}
               selectedUrl={ formData.image }
             >
               <Button type="button" variant="outline" size="sm" className="text-black">
