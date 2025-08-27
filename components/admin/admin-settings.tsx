@@ -119,7 +119,7 @@ export function AdminSettings() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="restaurant-name">Restaurant Name</Label>
-              <Input id="restaurant-name" defaultValue="Al Baik Restaurant" />
+              <Input id="restaurant-name" defaultValue="Jenny's Burger" />
             </div>
 
             <div className="space-y-2">

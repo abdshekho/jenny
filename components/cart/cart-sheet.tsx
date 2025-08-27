@@ -30,13 +30,13 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full sm:max-w-lg bg-black/80">
         <SheetHeader>
-          <SheetTitle>Your Cart ({state.itemCount} items)</SheetTitle>
+          <SheetTitle className="text-primary text-center">Your Order ({state.itemCount} items)</SheetTitle>
         </SheetHeader>
         
         <div className="flex flex-col h-full">
           {state.items.length === 0 ? (
             <div className="flex-1 flex items-center justify-center">
-              <p className="text-muted-foreground">Your cart is empty</p>
+              <p className="text-muted-foreground">Your order is empty</p>
             </div>
           ) : (
             <>
@@ -50,7 +50,7 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
                     />
                     
                     <div className="flex-1">
-                      <h4 className="font-medium">{item.titlePrimary}</h4>
+                      <h4 className="font-medium bg-primary text-black">{item.titlePrimary}</h4>
                       <p className="text-sm text-muted-foreground">{item.titleSecondary}</p>
                       <p className="font-bold text-primary">{MenuService.formatPrice(item.price)}</p>
                     </div>

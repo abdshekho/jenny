@@ -20,6 +20,7 @@ import type { Product, Category } from "@/lib/types"
 import { Plus, Edit, Trash2, Star, Loader2 } from "lucide-react"
 import { ImageIcon } from "lucide-react"
 import { toast } from "sonner"
+import Image from "next/image"
 
 export function ProductManager() {
   const [products, setProducts] = useState<Product[]>([])
@@ -196,8 +197,11 @@ export function ProductManager() {
       </div>
 
       { loading ? (
-        <div className="flex justify-center items-center py-12">
-          <Loader2 className="h-8 w-8 animate-spin" />
+        <div className="flex justify-center items-center py-20">
+          <div className="logo-loader">
+            <Image src={ 'logo2.png' } alt="logo" width={ 200 } height={ 200 } />
+          </div>
+          {/* <Loader2 className="h-8 w-8 animate-spin" /> */ }
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

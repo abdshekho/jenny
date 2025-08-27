@@ -1,7 +1,7 @@
-const CACHE_NAME = "al-baik-menu-v1"
-const STATIC_CACHE = "al-baik-static-v1"
-const IMAGE_CACHE = "al-baik-images-v1"
-const API_CACHE = "al-baik-api-v1"
+const CACHE_NAME = "jenny-menu-v1"
+const STATIC_CACHE = "jenny-static-v1"
+const IMAGE_CACHE = "jenny-images-v1"
+const API_CACHE = "jenny-api-v1"
 
 // Assets to cache immediately
 const STATIC_ASSETS = [
@@ -358,8 +358,8 @@ self.addEventListener("push", (event) => {
 
   const options = {
     body: event.data ? event.data.text() : "New menu items available!",
-    icon: "/icons/icon-192x192.png",
-    badge: "/icons/icon-72x72.png",
+    icon: "/icon.png",
+    badge: "/icon.png",
     vibrate: [200, 100, 200],
     data: {
       dateOfArrival: Date.now(),
@@ -369,12 +369,12 @@ self.addEventListener("push", (event) => {
       {
         action: "explore",
         title: "View Menu",
-        icon: "/icons/icon-192x192.png",
+        icon: "/icon.png",
       },
       {
         action: "close",
         title: "Close",
-        icon: "/icons/icon-192x192.png",
+        icon: "/icon.png",
       },
     ],
   }

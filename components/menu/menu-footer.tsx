@@ -1,6 +1,6 @@
 "use client"
 
-import { MapPin, Phone, Clock, Wifi, Instagram, Facebook, Twitter } from "lucide-react"
+import { MapPin, Phone, Clock, Wifi, Instagram, Facebook, Twitter, Truck, PartyPopper, Salad } from "lucide-react"
 
 export function MenuFooter() {
   return (
@@ -17,7 +17,7 @@ export function MenuFooter() {
               </div>
               <div className="flex items-center gap-3 ">
                 <Phone className="h-4 w-4 text-primary" />
-                <span className="text-sm">+966 11 123 4567</span>
+                <span className="text-sm">011 444 6633</span>
               </div>
               <div className="flex items-center gap-3">
                 <Clock className="h-4 w-4 text-primary" />
@@ -30,10 +30,22 @@ export function MenuFooter() {
           <div className="space-y-4 text-white">
             <h3 className="text-lg font-bold text-primary">Services</h3>
             <div className="space-y-2 text-sm">
-              <p>• Dine-in Experience</p>
-              <p>• Takeaway Orders</p>
-              <p>• Delivery Service</p>
-              <p>• Catering Events</p>
+              {/* <p>• Dine-in Experience</p> */}
+              {/* <p>• Takeaway Orders</p> */}
+              {/* <p>• Delivery Service</p> */}
+              {/* <p>• Catering Events</p> */}
+              <div className="flex items-center gap-2 pt-2">
+                <Salad className="h-4 w-4 text-primary" />
+                <span>Dine-in Experience</span>
+              </div>
+              <div className="flex items-center gap-2 pt-2">
+                <PartyPopper className="h-4 w-4 text-primary" />
+                <span>Catering Events</span>
+              </div>
+              <div className="flex items-center gap-2 pt-2">
+                <Truck className="h-4 w-4 text-primary" />
+                <span>Delivery Service</span>
+              </div>
               <div className="flex items-center gap-2 pt-2">
                 <Wifi className="h-4 w-4 text-primary" />
                 <span>Free WiFi Available</span>

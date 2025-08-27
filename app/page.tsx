@@ -8,14 +8,16 @@ import { MenuFooter } from "@/components/menu/menu-footer"
 import { InstallPrompt } from "@/components/pwa/install-prompt"
 import { MenuService } from "@/lib/menu-utils"
 import type { Category, Product } from "@/lib/types"
-import { Loader2 } from "lucide-react"
+import { LayoutGrid, List, ListOrdered, Loader2 } from "lucide-react"
 import Image from "next/image"
+import { Button } from "@/components/ui/button"
 
 export default function MenuPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
   const [categories, setCategories] = useState<Category[]>([])
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
 
   useEffect(() => {
     loadMenuData()
@@ -39,7 +41,7 @@ export default function MenuPage() {
   }
 
   const menuData = MenuService.groupProductsByCategory(categories, products)
-  const featuredProducts = MenuService.getFeaturedProducts(products)
+  // const featuredProducts = MenuService.getFeaturedProducts(products)
 
   const filteredMenuData =
     selectedCategory === "all" ? menuData : menuData.filter(({ category }) => category._id === selectedCategory)
@@ -107,9 +109,21 @@ export default function MenuPage() {
           </section>
         )} */}
 
+          {/* View Toggle Button */}
+          <div className="fixed bottom-10 right-3 z-20">
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
+              className="bg-white text-black px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors"
+            >
+              {viewMode === 'list' ? <LayoutGrid className="h-5 w-5"/>: <List className="h-5 w-5"/> }
+            </Button>
+          </div>
+
           {/* Menu Sections */}
           {filteredMenuData.map(({ category, products }) => (
-            <MenuSection key={category._id} category={category} products={products} />
+            <MenuSection key={category._id} category={category} products={products} viewMode={viewMode} />
           ))}
         </main>
       )}

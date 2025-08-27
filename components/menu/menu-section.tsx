@@ -10,11 +10,12 @@ import { Star, Clock, Leaf, Plus } from "lucide-react"
 interface MenuSectionProps {
   category: Category
   products: Product[]
+  viewMode?: 'grid' | 'list'
 }
 
-export function MenuSection({ category, products }: MenuSectionProps) {
+export function MenuSection({ category, products, viewMode = 'grid' }: MenuSectionProps) {
   const { dispatch } = useCart()
-  
+
   if (products.length === 0) return null
 
   const addToCart = (product: Product) => {
@@ -29,12 +30,14 @@ export function MenuSection({ category, products }: MenuSectionProps) {
         {/* {category.description && <p className="text-muted-foreground max-w-2xl mx-auto">{category.description}</p>} */ }
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className={ viewMode === 'grid' ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" : "space-y-4" }>
         { products.map((product) => (
-          <div key={ product._id } className="group">
-            <div className="bg-black/50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+          // <div className="group">
+            <div key={ product._id } className={ `bg-black/50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 ${viewMode === 'list' ? 'flex flex-row relative' : ''
+              }` }>
               {/* Product Image */ }
-              <div className="aspect-video bg-black/50 relative overflow-hidden">
+              <div className={ `bg-black/50 overflow-hidden ${viewMode === 'list' ? 'w-32 h-32 flex-shrink-0' : 'aspect-video relative'
+                }` }>
                 <img
                   src={
                     product.image || "/logo.jpg" ||
@@ -45,106 +48,79 @@ export function MenuSection({ category, products }: MenuSectionProps) {
                 />
 
                 {/* Price Badge */ }
-                <div className="absolute top-3 right-3">
-                  <div className="bg-accent text-accent-foreground px-2 py-1 rounded-full font-bold shadow-lg">
+                <div className="absolute top-2 right-2">
+                  <div className="bg-accent text-accent-foreground px-2 py-1 rounded-full font-bold shadow-lg text-sm">
                     { MenuService.formatPrice(product.price) }
                   </div>
-                  {/* <div className="bg-accent text-accent-foreground px-3 py-1 rounded-full font-bold shadow-lg">
-                    {MenuService.formatPrice(product.price)}
-                  </div> */}
                 </div>
 
                 {/* Featured Badge */ }
                 { product.isFeatured && (
-                  <div className="absolute top-3 left-3">
-                    <div className="bg-black text-primary px-2 py-1 rounded-full text-sm font-medium flex items-center gap-1">
+                  <div className="absolute top-2 left-2">
+                    <div className="bg-black text-primary px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
                       <Star className="h-3 w-3 fill-current" />
-                      Special
+                      { viewMode === 'list' ? '' : 'Special' }
                     </div>
                   </div>
                 ) }
 
                 {/* Discount Badge */ }
-                { product.originalPrice && (
-                  <div className="absolute bottom-3 right-3">
-                    {/* <Badge variant="destructive" className="font-bold bg-green-800"> */ }
-                    <Badge variant="destructive" className="font-bold">
+                { viewMode === 'grid' && product.originalPrice ? (
+                  <div className="absolute bottom-2 right-2">
+                    <Badge variant="destructive" className="font-bold text-xs">
                       { MenuService.getDiscountPercentage(product.originalPrice, product.price) }% OFF
                     </Badge>
                   </div>
-                ) }
+                ) : ( <Button
+                  onClick={ () => addToCart(product) }
+                  size="sm"
+                  className="absolute bottom-2 right-2 bg-white hover:bg-primary/90 cursor-pointer text-black"
+                >
+                  <Plus className="h-4 w-4 text-black" />
+                  Add
+                </Button> )}
               </div>
 
               {/* Product Info */ }
-              <h3 className="font-bold text-lg text-card-foreground bg-primary px-1 py-3 text-center leading-tight">{ product.titlePrimary }</h3>
-              {/* <h3 className="font-bold text-lg text-card-foreground bg-primary px-1 py-1 text-center leading-tight">{product.titleSecondary}</h3> */ }
-              <div className="p-4 space-y-3 text-center">
-                <div>
-                  <p className="text-primary">{ product.titleSecondary }</p>
-                </div>
-
-                { product.description && (
-                  <p className="text-sm text-white line-clamp-2 leading-relaxed">{ product.description }</p>
-                ) }
-                {/* Ingredients */ }
-                {/* {product.ingredients.length > 0 && (
-                  <div className="space-y-1">
-                    <p className="text-xs font-medium text-primary uppercase tracking-wide">Ingredients</p>
-                    <p className="text-sm text-white">
-                      {product.ingredients.slice(0, 4).join(" • ")}
-                      {product.ingredients.length > 4 && " • ..."}
-                    </p>
+              <div className={ viewMode === 'list' ? 'flex-1' : '' }>
+                <h3 className={ `font-bold text-lg  leading-tight text-center ${viewMode === 'list' ? 'px-4 py-2' : 'px-1 py-3 text-card-foreground bg-primary'
+                  }` }>{ product.titlePrimary }</h3>
+                <div className={ `text-center ${viewMode === 'list' ? 'px-4 flex flex-col space-y-1' : 'p-4  space-y-3 flex flex-col justify-between'}` }>
+                  <div>
+                    <p className="text-primary">{ product.titleSecondary }</p>
                   </div>
-                )} */}
 
-                {/* Footer Info */ }
-                <div className="flex items-center justify-between pt-2">
-                  {/* <div className="flex items-center gap-3">
-                    { product.preparationTime && (
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <Clock className="h-3 w-3" />
-                        { product.preparationTime }min
-                      </div>
-                    ) }
+                  { product.description && (
+                    <p dir="rtl" className={ `text-sm text-white leading-relaxed ${viewMode === 'list' ? 'line-clamp-2 text-center' : 'line-clamp-3'
+                      }` }>{ product.description }</p>
+                  ) }
 
-                    { product.allergens && product.allergens.includes("vegetarian") && (
-                      <div className="flex items-center gap-1 text-xs text-accent">
-                        <Leaf className="h-3 w-3" />
-                        Vegetarian
-                      </div>
-                    ) }
-                  </div> */}
+                  {/* Footer Info */ }
+                  <div className={ `flex items-center pt-2 ${viewMode === 'list' ? 'justify-between' : 'justify-between'
+                    }` }>
+                    {/* Add to Cart Button */ }
+                    { viewMode !== 'list' && <Button
+                      onClick={ () => addToCart(product) }
+                      size="sm"
+                      className="bg-white hover:bg-primary/90 cursor-pointer text-black"
+                    >
+                      <Plus className="h-4 w-4 text-black" />
+                      Add
+                    </Button> }
 
-                  {/* Add to Cart Button */ }
-                  <Button 
-                    onClick={() => addToCart(product)}
-                    size="sm"
-                    className="bg-primary hover:bg-primary/90 cursor-pointer"
-                  >
-                    <Plus className="h-4 w-4 mr-1" />
-                    Add to Cart
-                  </Button>
-                  
-                  {/* Price with Original Price */ }
-                  <div className="text-right">
-                    { product.originalPrice && (
-                      <p className="text-xs text-muted-foreground line-through">
-                        { MenuService.formatPrice(product.originalPrice) }
-                      </p>
-                    ) }
+
+                    {/* Price with Original Price */ }
+                    <div className="text-right">
+                      { product.originalPrice && (
+                        <p className="text-xs text-muted-foreground line-through">
+                          { MenuService.formatPrice(product.originalPrice) }
+                        </p>
+                      ) }
+                    </div>
                   </div>
                 </div>
-
-                {/* Allergen Info */ }
-                {/* { product.allergens && product.allergens.length > 0 && (
-                  <div className="pt-2 border-t border-border">
-                    <p className="text-xs text-muted-foreground">
-                      <span className="font-medium">Contains:</span> { product.allergens.join(", ") }
-                    </p>
-                  </div>
-                ) } */}
               </div>
-            </div>
+            {/* </div> */}
           </div>
         )) }
       </div>

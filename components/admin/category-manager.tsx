@@ -16,6 +16,7 @@ import { apiClient } from "@/lib/api-client"
 import type { Category } from "@/lib/types"
 import { Plus, Edit, Trash2, Loader2 } from "lucide-react"
 import { toast } from "sonner"
+import Image from "next/image"
 
 export function CategoryManager() {
   const [categories, setCategories] = useState<Category[]>([])
@@ -26,7 +27,7 @@ export function CategoryManager() {
 
   useEffect(() => {
     loadCategories()
-    console.log('tttttttttttttt',categories);
+    console.log('tttttttttttttt', categories);
   }, [])
 
   const loadCategories = async () => {
@@ -83,7 +84,7 @@ export function CategoryManager() {
 
   const handleDeleteCategory = async (id: string) => {
     if (!confirm('Are you sure you want to delete this category?')) return
-    
+
     try {
       const response = await apiClient.deleteCategory(id)
       if (response.success) {
@@ -100,7 +101,7 @@ export function CategoryManager() {
   const toggleCategoryStatus = async (id: string) => {
     const category = categories.find(cat => cat._id === id)
     if (!category) return
-    
+
     try {
       const response = await apiClient.updateCategory(id, { isActive: !category.isActive })
       if (response.success) {
@@ -122,11 +123,11 @@ export function CategoryManager() {
           <p className="text-muted-foreground">Manage your menu categories</p>
         </div>
 
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <Dialog open={ isDialogOpen } onOpenChange={ setIsDialogOpen }>
           <DialogTrigger asChild>
             <Button
               className="bg-primary text-primary-foreground hover:bg-primary/90"
-              onClick={() => setEditingCategory(null)}
+              onClick={ () => setEditingCategory(null) }
             >
               <Plus className="h-4 w-4 mr-2" />
               Add Category
@@ -134,71 +135,74 @@ export function CategoryManager() {
           </DialogTrigger>
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-black">
             <DialogHeader>
-              <DialogTitle>{editingCategory ? "Edit Category" : "Add New Category"}</DialogTitle>
+              <DialogTitle>{ editingCategory ? "Edit Category" : "Add New Category" }</DialogTitle>
             </DialogHeader>
             <CategoryForm
-              category={editingCategory}
-              onSave={handleSaveCategory}
-              onCancel={() => setIsDialogOpen(false)}
-              saving={saving}
+              category={ editingCategory }
+              onSave={ handleSaveCategory }
+              onCancel={ () => setIsDialogOpen(false) }
+              saving={ saving }
             />
           </DialogContent>
         </Dialog>
       </div>
 
-      {loading ? (
-        <div className="flex justify-center items-center py-12">
-          <Loader2 className="h-8 w-8 animate-spin" />
+      { loading ? (
+        <div className="flex justify-center items-center py-20">
+          <div className="logo-loader">
+            <Image src={ 'logo2.png' } alt="logo" width={ 200 } height={ 200 } />
+          </div>
+          {/* <Loader2 className="h-8 w-8 animate-spin" /> */ }
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          { categories.map((category,index) => (
-          <Card key={index} className="bg-black/20">
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-lg text-primary">{category.titlePrimary}</CardTitle>
-                <Badge variant={category.isActive ? "default" : "destructive"}>
-                  {category.isActive ? "Active" : "Inactive"}
-                </Badge>
-              </div>
-              <p className="text-sm text-muted-foreground">{category.titleSecondary}</p>
-            </CardHeader>
-
-            <CardContent className="space-y-4">
-
-
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Switch checked={category.isActive} onCheckedChange={() => toggleCategoryStatus(category._id)} />
-                  <span className="text-sm text-muted-foreground">Active</span>
+          { categories.map((category, index) => (
+            <Card key={ index } className="bg-black/20">
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-lg text-primary">{ category.titlePrimary }</CardTitle>
+                  <Badge variant={ category.isActive ? "default" : "destructive" }>
+                    { category.isActive ? "Active" : "Inactive" }
+                  </Badge>
                 </div>
+                <p className="text-sm text-muted-foreground">{ category.titleSecondary }</p>
+              </CardHeader>
 
-                <div className="flex gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      setEditingCategory(category)
-                      setIsDialogOpen(true)
-                    }}
-                  >
-                    <Edit className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleDeleteCategory(category._id)}
-                    className="text-destructive hover:text-destructive"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
+              <CardContent className="space-y-4">
+
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Switch checked={ category.isActive } onCheckedChange={ () => toggleCategoryStatus(category._id) } />
+                    <span className="text-sm text-muted-foreground">Active</span>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={ () => {
+                        setEditingCategory(category)
+                        setIsDialogOpen(true)
+                      } }
+                    >
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={ () => handleDeleteCategory(category._id) }
+                      className="text-destructive hover:text-destructive"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-          ))}
+              </CardContent>
+            </Card>
+          )) }
         </div>
-      )}
+      ) }
     </div>
   )
 }
@@ -225,14 +229,14 @@ function CategoryForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={ handleSubmit } className="space-y-6">
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="titlePrimary">Primary Title</Label>
           <Input
             id="titlePrimary"
-            value={formData.titlePrimary}
-            onChange={(e) => setFormData((prev) => ({ ...prev, titlePrimary: e.target.value }))}
+            value={ formData.titlePrimary }
+            onChange={ (e) => setFormData((prev) => ({ ...prev, titlePrimary: e.target.value })) }
             placeholder="e.g., Appetizers"
             required
           />
@@ -242,8 +246,8 @@ function CategoryForm({
           <Label htmlFor="titleSecondary">Secondary Title</Label>
           <Input
             id="titleSecondary"
-            value={formData.titleSecondary}
-            onChange={(e) => setFormData((prev) => ({ ...prev, titleSecondary: e.target.value }))}
+            value={ formData.titleSecondary }
+            onChange={ (e) => setFormData((prev) => ({ ...prev, titleSecondary: e.target.value })) }
             placeholder="e.g., المقبلات"
             required
           />
@@ -255,11 +259,11 @@ function CategoryForm({
 
 
       <div className="flex gap-2 pt-4">
-        <Button type="submit" className="flex-1 bg-primary text-black" disabled={saving}>
-          {saving && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
-          {category ? "Update" : "Create"} Category
+        <Button type="submit" className="flex-1 bg-primary text-black" disabled={ saving }>
+          { saving && <Loader2 className="h-4 w-4 mr-2 animate-spin" /> }
+          { category ? "Update" : "Create" } Category
         </Button>
-        <Button type="button" variant="outline" onClick={onCancel} disabled={saving} className="text-black">
+        <Button type="button" variant="outline" onClick={ onCancel } disabled={ saving } className="text-black">
           Cancel
         </Button>
       </div>

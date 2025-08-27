@@ -16,7 +16,7 @@ export function CategoryNavigation({ categories, selectedCategory, onCategoryCha
   return (
     <nav className="sticky top-0 z-10  backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4 py-4">
-        <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+        <div className="flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-primary scrollbar-track-transparent">
           <Button
             variant={selectedCategory === "all" ? "default" : "outline"}
             className={cn(
