@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import type { Category } from "@/lib/types"
+import { useLanguage } from "@/lib/language-context"
 
 interface CategoryNavigationProps {
   categories: Category[]
@@ -11,12 +12,13 @@ interface CategoryNavigationProps {
 }
 
 export function CategoryNavigation({ categories, selectedCategory, onCategoryChange }: CategoryNavigationProps) {
+  const { isArabic } = useLanguage()
   const activeCategories = categories.filter((cat) => cat.isActive).sort((a, b) => a.order - b.order)
   console.log("cccccccccccccccccccc",activeCategories);
   return (
     <nav className="sticky top-0 z-10  backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4 py-4">
-        <div className="flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-primary scrollbar-track-transparent">
+        <div dir={isArabic? 'rtl': 'ltr'} className="flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-primary scrollbar-track-transparent">
           <Button
             variant={selectedCategory === "all" ? "default" : "outline"}
             className={cn(
@@ -27,7 +29,7 @@ export function CategoryNavigation({ categories, selectedCategory, onCategoryCha
             )}
             onClick={() => onCategoryChange("all")}
           >
-            All Items
+            {isArabic? 'كل القائمة':'All Items'}
           </Button>
 
           {activeCategories.map((category) => (
@@ -42,7 +44,7 @@ export function CategoryNavigation({ categories, selectedCategory, onCategoryCha
               )}
               onClick={() => onCategoryChange(category._id)}
             >
-              <span className="block">{category.titlePrimary}</span>
+              <span className="block">{isArabic? ( category.titleSecondary ||category.titlePrimary) : (category.titlePrimary || category.titleSecondary) }</span>
             </Button>
           ))}
         </div>
