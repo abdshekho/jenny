@@ -312,9 +312,8 @@ function isImageRequest(request) {
 function isStaticAsset(request) {
   const url = new URL(request.url)
   return (
-    url.pathname.startsWith("/_next/") ||
     url.pathname.startsWith("/static/") ||
-    /\.(js|css|woff|woff2|ttf|eot)$/i.test(url.pathname)
+    /\.(css|woff|woff2|ttf|eot)$/i.test(url.pathname)
   )
 }
 
