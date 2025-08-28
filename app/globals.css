@@ -142,18 +142,18 @@ body {
 
 @keyframes spinZoom {
   0% {
-    transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(0.7);
   }
   25% {
-    transform: rotate(360deg) scale(1.15);
+    transform: rotate(-360deg) scale(1.15);
   }
   50% {
-    transform: rotate(720deg) scale(1);
+    transform: rotate(-720deg) scale(1);
   }
   75% {
-    transform: rotate(1080deg) scale(0.85);
+    transform: rotate(-1080deg) scale(0.85);
   }
   100% {
-    transform: rotate(1440deg) scale(1);
+    transform: rotate(-1440deg) scale(0.7);
   }
 }

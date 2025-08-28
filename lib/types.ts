@@ -1,5 +1,6 @@
 export interface Category {
-  _id: string
+  id: string
+  _id?: string
   titlePrimary: string // Main language title
   titleSecondary: string // Secondary language title
   order: number
@@ -9,7 +10,8 @@ export interface Category {
 }
 
 export interface Product {
-  _id: string
+  id: string
+  _id?: string
   categoryId: string
   titlePrimary: string // Main language title
   titleSecondary: string // Secondary language title
@@ -49,4 +51,4 @@ export interface ApiResponse<T> {
   message?: string
 }
 
-export interface MenuResponse extends ApiResponse<MenuData> {}
+export interface MenuResponse extends ApiResponse<MenuData> { }

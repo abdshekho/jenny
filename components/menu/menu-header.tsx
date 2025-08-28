@@ -14,7 +14,7 @@ export function MenuHeader() {
       <div className="container mx-auto px-4 py-8">
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-3">
-            <Image src={ 'logo2.png' } alt="logo" width={ 200 } height={ 200 } />
+            <Image src={ 'logo3.webp' } alt="logo" width={ 200 } height={ 200 } />
             {/* <Image src={ 'logo.jpg' } alt="logo" width={ 60 } height={ 60 } /> */ }
             <div>
               {/* <h1 className="text-4xl font-bold">JENNY'S BURGER</h1> */ }

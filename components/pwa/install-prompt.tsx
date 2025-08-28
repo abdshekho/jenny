@@ -50,16 +50,16 @@ export function InstallPrompt() {
   if (!showInstallPrompt) return null
 
   return (
-    <Card className="fixed bottom-4 left-4 right-4 z-50 bg-card border-2 border-primary shadow-lg md:left-auto md:right-4 md:w-80">
+    <Card className="fixed bottom-4 left-4 right-4 z-50 bg-black border-2 border-primary shadow-lg md:left-auto md:right-4 md:w-80">
       <CardContent className="p-4">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
-            <h3 className="font-semibold text-card-foreground mb-1">Install Jenny's Burger Menu</h3>
-            <p className="text-sm text-muted-foreground mb-3">
+            <h3 className="font-semibold text-white mb-1">Install Jenny's Burger Menu</h3>
+            <p className="text-sm text-gray-300 mb-3">
               Add to your home screen for quick access and offline viewing
             </p>
             <div className="flex gap-2">
-              <Button onClick={handleInstallClick} size="sm" className="bg-primary text-primary-foreground">
+              <Button onClick={handleInstallClick} size="sm" className="bg-primary text-black">
                 <Download className="h-4 w-4 mr-2" />
                 Install
               </Button>

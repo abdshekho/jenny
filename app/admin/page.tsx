@@ -2,10 +2,8 @@
 
 import { useState } from "react"
 import { AdminSidebar } from "@/components/admin/admin-sidebar"
-// import { AdminDashboard } from "@/components/admin/admin-dashboard"
 import { CategoryManager } from "@/components/admin/category-manager"
 import { ProductManager } from "@/components/admin/product-manager"
-
 
 type AdminView = "categories" | "products"
 

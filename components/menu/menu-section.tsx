@@ -40,7 +40,7 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
       <div className={ viewMode === 'grid' ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" : "space-y-4" }>
         { products.map((product) => (
           // <div className="group">
-            <div key={ product._id } className={ `bg-black/50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 ${viewMode === 'list' ? 'flex flex-row relative' : 'flex flex-col h-full'
+            <div key={ product.id } className={ `bg-black/50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 ${viewMode === 'list' ? 'flex flex-row relative' : 'flex flex-col h-full'
               }` }>
               {/* Product Image */ }
               <div className={ `bg-black/50 overflow-hidden ${viewMode === 'list' ? 'w-32 h-32 flex-shrink-0' : 'aspect-video relative'

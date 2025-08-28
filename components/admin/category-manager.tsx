@@ -150,7 +150,7 @@ export function CategoryManager() {
       { loading ? (
         <div className="flex justify-center items-center py-20">
           <div className="logo-loader">
-            <Image src={ 'logo2.png' } alt="logo" width={ 200 } height={ 200 } />
+            <Image src={ 'logo2.webp' } alt="logo" width={ 200 } height={ 200 } />
           </div>
           {/* <Loader2 className="h-8 w-8 animate-spin" /> */ }
         </div>
@@ -169,7 +169,9 @@ export function CategoryManager() {
               </CardHeader>
 
               <CardContent className="space-y-4">
-
+                <div className="text-sm text-muted-foreground">
+                  Order: { category.order || 0 }
+                </div>
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -221,6 +223,7 @@ function CategoryForm({
   const [formData, setFormData] = useState({
     titlePrimary: category?.titlePrimary || "",
     titleSecondary: category?.titleSecondary || "",
+    order: category?.order || 0,
   })
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -243,15 +246,30 @@ function CategoryForm({
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="titleSecondary">Secondary Title</Label>
+          <Label htmlFor="titleSecondary">Arabic Title</Label>
           <Input
             id="titleSecondary"
+            dir="rtl"
             value={ formData.titleSecondary }
             onChange={ (e) => setFormData((prev) => ({ ...prev, titleSecondary: e.target.value })) }
             placeholder="e.g., المقبلات"
             required
           />
         </div>
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="order">Display Order</Label>
+        <Input
+          id="order"
+          type="number"
+          className="[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
+          value={ formData.order }
+          onChange={ (e) => setFormData((prev) => ({ ...prev, order: parseInt(e.target.value) || 0 })) }
+          onFocus={ (e) => e.target.select() }
+          placeholder="0"
+          min="0"
+        />
       </div>
 
 

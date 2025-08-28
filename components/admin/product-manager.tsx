@@ -199,7 +199,7 @@ export function ProductManager() {
       { loading ? (
         <div className="flex justify-center items-center py-20">
           <div className="logo-loader">
-            <Image src={ 'logo2.png' } alt="logo" width={ 200 } height={ 200 } />
+            <Image src={ 'logo2.webp' } alt="logo" width={ 200 } height={ 200 } />
           </div>
           {/* <Loader2 className="h-8 w-8 animate-spin" /> */ }
         </div>
@@ -356,7 +356,6 @@ function ProductForm({
     titleSecondary: product?.titleSecondary || "",
     description: product?.description || "",
     descriptionAr: product?.descriptionAr || "",
-
     price: product?.price || 0,
     originalPrice: product?.originalPrice || 0,
     image: product?.image || "",
@@ -453,7 +452,9 @@ function ProductForm({
             type="number"
             step="1000"
             value={ formData.price }
+            onFocus={ (e) => e.target.select() }
             onChange={ (e) => setFormData((prev) => ({ ...prev, price: Number.parseFloat(e.target.value) || 0 })) }
+            className="[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
             required
           />
         </div>
@@ -463,10 +464,12 @@ function ProductForm({
             id="originalPrice"
             type="number"
             step="1000"
+            onFocus={ (e) => e.target.select() }
             value={ formData.originalPrice }
             onChange={ (e) =>
               setFormData((prev) => ({ ...prev, originalPrice: Number.parseFloat(e.target.value) || 0 }))
             }
+            className="[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
             placeholder="For discounted items"
           />
         </div>

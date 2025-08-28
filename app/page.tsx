@@ -62,7 +62,7 @@ export default function MenuPage() {
       { loading ? (
         <div className="flex justify-center items-center py-20">
           <div className="logo-loader">
-            <Image src={ 'logo2.png' } alt="logo" width={ 200 } height={ 200 } />
+            <Image src={ 'logo2.webp' } alt="logo" width={ 200 } height={ 200 } />
           </div>
           {/* <Loader2 className="h-8 w-8 animate-spin" /> */ }
         </div>

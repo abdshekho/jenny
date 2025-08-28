@@ -86,8 +86,8 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/icon.png" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/logo3.webp" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-logo3.webp" />
 
         {/* Apple-specific meta tags */}
         <meta name="apple-mobile-web-app-capable" content="yes" />

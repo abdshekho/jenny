@@ -7,7 +7,7 @@ import Image from "next/image"
 
 interface AdminSidebarProps {
   currentView: string
-  onViewChange: (view: string) => void
+  onViewChange: (view: any) => any
 }
 
 const sidebarItems = [
@@ -43,7 +43,7 @@ export function AdminSidebar({ currentView, onViewChange }: AdminSidebarProps) {
     <div className="w-64 bg-black/60 border-r border-sidebar-border">
       <div className="p-6">
         <div className="mb-8">
-            <Image src={ 'logo2.png' } alt="logo" width={ 200 } height={ 200 } />
+            <Image src={ 'logo3.webp' } alt="logo" width={ 200 } height={ 200 } />
         </div>
 
         <nav className="space-y-2">

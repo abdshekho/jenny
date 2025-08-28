@@ -358,8 +358,8 @@ self.addEventListener("push", (event) => {
 
   const options = {
     body: event.data ? event.data.text() : "New menu items available!",
-    icon: "/icon.png",
-    badge: "/icon.png",
+    icon: "/logo3.webp",
+    badge: "/logo3.webp",
     vibrate: [200, 100, 200],
     data: {
       dateOfArrival: Date.now(),
@@ -369,12 +369,12 @@ self.addEventListener("push", (event) => {
       {
         action: "explore",
         title: "View Menu",
-        icon: "/icon.png",
+        icon: "/logo3.webp",
       },
       {
         action: "close",
         title: "Close",
-        icon: "/icon.png",
+        icon: "/logo3.webp",
       },
     ],
   }
