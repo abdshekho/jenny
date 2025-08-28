@@ -235,7 +235,7 @@ export function ProductManager() {
                   <div className="aspect-video bg-muted relative overflow-hidden">
                     <img
                       src={
-                        product.image ||
+                        product.image || "/logo.webp" || 
                         `/placeholder.svg?height=200&width=300&query=${encodeURIComponent(product.titlePrimary)}`
                       }
                       alt={ product.titlePrimary }
@@ -365,7 +365,7 @@ function ProductForm({
     e.preventDefault()
     onSave({
       ...formData,
-      originalPrice: formData.originalPrice || undefined,
+      originalPrice: formData.originalPrice === 0 ? null : formData.originalPrice || undefined,
     })
   }
 

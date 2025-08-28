@@ -91,10 +91,15 @@ export function CategoryManager() {
         setCategories((prev) => prev.filter((cat) => cat._id !== id))
         toast.success('Category deleted successfully')
       } else {
-        toast.error('Failed to delete category')
+        // Handle dependency error specifically
+        if (response.error?.includes('product(s) are using')) {
+          toast.error(response.error, { duration: 5000 })
+        } else {
+          toast.error('Failed to delete category')
+        }
       }
     } catch (error) {
-      toast.error('Error deleting category')
+      toast.error('Error deleting category maybe there are products depend on this category')
     }
   }
 

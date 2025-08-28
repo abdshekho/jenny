@@ -47,8 +47,7 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
                 }` }>
                 <img
                   src={
-                    product.image || "/logo.jpg" ||
-                    `/placeholder.svg?height=200&width=300&query=${encodeURIComponent(product.titlePrimary)}`
+                    product.image || "/logo.webp"
                   }
                   alt={ product.titlePrimary }
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
