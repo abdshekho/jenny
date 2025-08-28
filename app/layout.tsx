@@ -2,8 +2,8 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
-import { ServiceWorkerRegistration } from "@/components/pwa/service-worker-registration"
-import { CartProvider } from "@/lib/cart-context"
+import { ServiceWorkerRegistration } from "../components/pwa/service-worker-registration"
+import { CartProvider } from "../lib/cart-context"
 import { LanguageProvider } from "../lib/language-context"
 import { Toaster } from "sonner"
 import "./globals.css"
@@ -67,8 +67,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#15803d" },
-    { media: "(prefers-color-scheme: dark)", color: "#15803d" },
+    { media: "(prefers-color-scheme: light)", color: "#fece0b" },
+    { media: "(prefers-color-scheme: dark)", color: "#fece0b" },
   ],
   width: "device-width",
   initialScale: 1,
