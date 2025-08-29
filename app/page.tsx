@@ -12,6 +12,8 @@ import { LayoutGrid, List, ListOrdered, Loader2 } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { LanguageToggle } from "@/components/ui/language-toggle"
+import { CartSheet } from "@/components/cart/cart-sheet"
+import { CartButton } from "@/components/cart/cart-button"
 
 export default function MenuPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
@@ -19,6 +21,8 @@ export default function MenuPage() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
+  const [cartOpen, setCartOpen] = useState(false)
+
 
   useEffect(() => {
     loadMenuData()
@@ -109,7 +113,7 @@ export default function MenuPage() {
         )} */}
 
           {/* View Toggle Button */ }
-          <div className="flex flex-col gap-2 fixed bottom-10 right-3 z-20">
+          <div className="flex flex-col gap-2 fixed bottom-5 right-3 z-20 mb-0">
             <LanguageToggle
               className="bg-white/20 text-black rounded-lg hover:bg-primary/90 transition-colors"
             />
@@ -121,6 +125,11 @@ export default function MenuPage() {
             >
               { viewMode === 'list' ? <LayoutGrid className="h-5 w-5" /> : <List className="h-5 w-5" /> }
             </Button>
+
+            <div className=" flex justify-center">
+              <CartButton onClick={ () => setCartOpen(true) } />
+            </div>
+            <CartSheet open={ cartOpen } onOpenChange={ setCartOpen } />
 
           </div>
 

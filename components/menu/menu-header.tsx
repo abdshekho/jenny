@@ -1,13 +1,9 @@
 "use client"
 
-import { useState } from "react"
-import { ChefHat, Clock, MapPin, Phone } from "lucide-react"
-import { CartButton } from "@/components/cart/cart-button"
-import { CartSheet } from "@/components/cart/cart-sheet"
+import { Clock, MapPin, Phone } from "lucide-react"
 import Image from "next/image"
 
 export function MenuHeader() {
-  const [cartOpen, setCartOpen] = useState(false)
 
   return (
     <header className="text-white">
@@ -39,13 +35,10 @@ export function MenuHeader() {
               <span>011 4446633</span>
             </div>
           </div>
-          
-          <div className="fixed bottom-10 right-3 z-20 flex justify-center pt-4">
-            <CartButton onClick={() => setCartOpen(true)}/>
-          </div>
         </div>
       </div>
-      <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
+
+
     </header>
   )
 }
