@@ -7,6 +7,7 @@ import { useCart } from "@/lib/cart-context"
 import { useLanguage } from "@/lib/language-context"
 import type { Category, Product } from "@/lib/types"
 import { Star, Plus } from "lucide-react"
+import { toast } from "sonner"
 
 interface MenuSectionProps {
   category: Category
@@ -22,6 +23,19 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
 
   const addToCart = (product: Product) => {
     dispatch({ type: 'ADD_ITEM', payload: product })
+    
+    // Show toast notification
+    toast.success(
+      isArabic 
+        ? `تم إضافة ${product.titleSecondary || product.titlePrimary} إلى طلبك'`
+        : `${product.titlePrimary || product.titleSecondary} added to your order`,
+      {
+        description: isArabic 
+          ? `السعر: ${MenuService.formatPrice(product.price)}`
+          : `Price: ${MenuService.formatPrice(product.price)}`,
+        duration: 2000,
+      }
+    )
   }
 
   return (

@@ -71,7 +71,7 @@ export default function MenuPage() {
           {/* <Loader2 className="h-8 w-8 animate-spin" /> */ }
         </div>
       ) : (
-        <main className="container mx-auto px-4 py-8 space-y-12">
+        <main className="container mx-auto px-4 py-8 space-y-12 min-h-[350px]">
           {/* Featured Items Section */ }
           {/* {selectedCategory === "all" && featuredProducts.length > 0 && (
           <section className="space-y-6">

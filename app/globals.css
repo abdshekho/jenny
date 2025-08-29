@@ -131,11 +131,7 @@ body {
   }
 }
 
-
-.logo-loader {
- /* لون خلفية */
-}
-
+button{ cursor: pointer;}
 .logo-loader img {
   animation: spinZoom 5s infinite ease-in-out;
 }
