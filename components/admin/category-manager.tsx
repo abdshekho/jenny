@@ -160,7 +160,7 @@ export function CategoryManager() {
           {/* <Loader2 className="h-8 w-8 animate-spin" /> */ }
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           { categories.map((category, index) => (
             <Card key={ index } className="bg-black/20">
               <CardHeader className="pb-3">

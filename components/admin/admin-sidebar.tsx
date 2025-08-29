@@ -8,14 +8,10 @@ import Image from "next/image"
 interface AdminSidebarProps {
   currentView: string
   onViewChange: (view: any) => any
+  onClose?: () => void
 }
 
 const sidebarItems = [
-  // {
-  //   id: "dashboard",
-  //   label: "Dashboard",
-  //   icon: LayoutDashboard,
-  // },
   {
     id: "categories",
     label: "Categories",
@@ -26,19 +22,9 @@ const sidebarItems = [
     label: "Products",
     icon: Package,
   },
-  // {
-  //   id: "preview",
-  //   label: "Menu Preview",
-  //   icon: Eye,
-  // },
-  // {
-  //   id: "settings",
-  //   label: "Settings",
-  //   icon: Settings,
-  // },
 ]
 
-export function AdminSidebar({ currentView, onViewChange }: AdminSidebarProps) {
+export function AdminSidebar({ currentView, onViewChange, onClose }: AdminSidebarProps) {
   return (
     <div className="w-64 bg-black/60 border-r border-sidebar-border">
       <div className="p-6">
@@ -59,7 +45,10 @@ export function AdminSidebar({ currentView, onViewChange }: AdminSidebarProps) {
                     ? "bg-primary text-black"
                     : "text-white hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                 )}
-                onClick={() => onViewChange(item.id)}
+                onClick={() => {
+                  onViewChange(item.id)
+                  onClose?.()
+                }}
               >
                 <Icon className="h-5 w-5" />
                 {item.label}
