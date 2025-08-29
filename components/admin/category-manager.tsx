@@ -131,7 +131,7 @@ export function CategoryManager() {
         <Dialog open={ isDialogOpen } onOpenChange={ setIsDialogOpen }>
           <DialogTrigger asChild>
             <Button
-              className="bg-primary text-primary-foreground hover:bg-primary/90"
+              className="bg-primary text-black hover:bg-primary/90"
               onClick={ () => setEditingCategory(null) }
             >
               <Plus className="h-4 w-4 mr-2" />

@@ -44,7 +44,7 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
                 {state.items.map((item) => (
                   <div key={item.id} className="flex items-center gap-3 p-3 border rounded-lg mx-1 bg-gray-700">
                     <img
-                      src={item.image || "/placeholder.svg"}
+                      src={item.image || "/logo.webp"}
                       alt={item.titlePrimary}
                       className="w-16 h-16 object-cover rounded"
                     />

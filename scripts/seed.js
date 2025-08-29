@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
 // MongoDB connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/restaurant-menu'
+const MONGODB_URI = process.env.MONGODB_URI 
+// || 'mongodb://localhost:27017/restaurant-menu'
 
 // Category Schema
 const CategorySchema = new mongoose.Schema({

@@ -27,8 +27,8 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
   return (
     <section className="space-y-6">
       <div className="text-center space-y-2 flex flex-col items-center relative">
-        <h2 className="text-3xl font-bold text-black bg-primary py-2 px-4 rounded-sm">{ category.titlePrimary }</h2>
-        <p className="text-xl text-muted-foreground">{ category.titleSecondary }</p>
+        <h2 className="text-xl md:text-3xl font-bold text-black bg-primary py-2 px-4 rounded-sm">{ category.titlePrimary }</h2>
+        <p className="text-lg md:text-xl text-muted-foreground">{ category.titleSecondary }</p>
         {/* Language Toggle Button */ }
         {/* <LanguageToggle 
           className="absolute top-0 right-0 bg-white/10 hover:bg-white/20 text-white border-white/30"
@@ -36,13 +36,13 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
         {/* {category.description && <p className="text-muted-foreground max-w-2xl mx-auto">{category.description}</p>} */ }
       </div>
 
-      <div className={ viewMode === 'grid' ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" : "space-y-4" }>
+      <div className={ viewMode === 'grid' ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 md:gap-3 lg:gap-6" : "space-y-1 md:space-y-2 lg:space-y-4" }>
         { products.map((product) => (
           // <div className="group">
           <div key={ product.id } className={ `bg-black/50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 ${viewMode === 'list' ? 'flex flex-row relative' : 'flex flex-col h-full'
             }` }>
             {/* Product Image */ }
-            <div className={ `bg-black/50 overflow-hidden ${viewMode === 'list' ? 'w-32 h-36 flex-shrink-0' : 'aspect-video relative'
+            <div className={ `bg-black/50 overflow-hidden ${viewMode === 'list' ? 'w-32 h-32 flex-shrink-0' : 'aspect-video relative'
               }` }>
               <img
                 src={
@@ -53,25 +53,26 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
               />
 
               {/* Price Badge */ }
-              <div className="absolute top-2 right-2">
-                <div className="bg-accent text-accent-foreground px-2 py-1 rounded-full font-bold shadow-lg text-sm">
+              <div className={`absolute ${viewMode === 'list'?' md:top-2 md:right-2':'top-0.5 md:top-2 right-2'}`}>
+                <div className="bg-accent text-accent-foreground px-2 py-1 rounded-full font-bold shadow-lg text-xs md:text-sm">
                   { MenuService.formatPrice(product.price) }
                 </div>
               </div>
 
               {/* Featured Badge */ }
               { product.isFeatured && (
-                <div className="absolute top-2 left-2">
+                <div className="absolute top-0.5 md:top-2 left-2">
                   <div className="bg-black text-primary px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
                     <Star className="h-3 w-3 fill-current" />
-                    { viewMode === 'list' ? '' : 'Special' }
+                    {/* { viewMode === 'list' ? '' : 'Special' } */}
+                    Special
                   </div>
                 </div>
               ) }
 
               {/* Discount Badge */ }
               { product.originalPrice ? (
-                <div className={ `absolute ${viewMode === 'list' ? 'top-2 left-2' : 'bottom-2 right-2'}` }>
+                <div className={ `absolute ${viewMode === 'list' ? 'md:bottom-2 md:left-2' : 'bottom-2 right-2'}` }>
                   <Badge variant="destructive" className="font-bold text-xs">
                     { MenuService.getDiscountPercentage(product.originalPrice, product.price) }% OFF
                   </Badge>
@@ -81,12 +82,12 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
 
             {/* Product Info */ }
             <div className={ viewMode === 'list' ? 'flex-1' : 'flex flex-col flex-1' }>
-              <h3 className={ `font-bold text-lg  leading-tight text-center ${viewMode === 'list' ? 'px-4 py-2 text-primary' : 'px-1 py-3 text-card-foreground bg-primary'
+              <h3 className={ `font-bold text-base md:text-lg  leading-tight text-center ${viewMode === 'list' ? 'px-4 py-2 text-primary' : 'px-1 py-1 md:py-3 text-card-foreground bg-primary'
                 }` }>{ isArabic ? (product.titleSecondary || product.titlePrimary ) : (product.titlePrimary || product.titleSecondary ) }</h3>
-              <div className={ `text-center ${viewMode === 'list' ? 'px-4 flex flex-col space-y-1' : 'p-4 space-y-3 flex flex-col flex-1'}` }>
+              <div className={ `text-center ${viewMode === 'list' ? 'px-4 flex flex-col space-y-1' : 'p-2 md:p-4 space-y-3 flex flex-col flex-1'}` }>
 
                 { (product.description || product.descriptionAr) && (
-                  <p dir={ isArabic ? "rtl" : "ltr" } className={ `text-sm text-white leading-relaxed ${viewMode === 'list' ? 'line-clamp-2 text-center' : 'line-clamp-3'
+                  <p dir={ isArabic ? "rtl" : "ltr" } className={ `text-xs md:text-sm text-white leading-relaxed ${viewMode === 'list' ? 'line-clamp-2 text-center' : 'line-clamp-3'
                     }` }>
                     { isArabic ? (product.descriptionAr || product.description) : (product.description || product.descriptionAr) }
                   </p>
@@ -96,14 +97,14 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
                 <div className={ `flex items-center pt-2 mt-auto ${viewMode === 'list' ? 'flex-row-reverse justify-between' : 'justify-between'
                   }` }>
                   {/* Add to Cart Button */ }
-                  { true && <Button
+                  { true && <button
                     onClick={ () => addToCart(product) }
-                    size="sm"
-                    className="bg-white hover:bg-primary/90 cursor-pointer text-black"
+                    // size="sm"
+                    className="flex justify-between items-center rounded-md py-0.5 px-2 md:px-2 text-sm md:text-base text md:py-1 bg-white hover:bg-primary/90 cursor-pointer text-black"
                   >
-                    <Plus className="h-4 w-4 text-black" />
+                    <Plus className="h-3 w-3 md:h-4 md:w-4 text-black" />
                     Add
-                  </Button> }
+                  </button> }
 
 
                   {/* Price with Original Price */ }
