@@ -36,7 +36,7 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
         {/* {category.description && <p className="text-muted-foreground max-w-2xl mx-auto">{category.description}</p>} */ }
       </div>
 
-      <div className={ viewMode === 'grid' ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 md:gap-3 lg:gap-6" : "space-y-1 md:space-y-2 lg:space-y-4" }>
+      <div className={ viewMode === 'grid' ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-3 lg:gap-6" : "space-y-1 md:space-y-2 lg:space-y-4" }>
         { products.map((product) => (
           // <div className="group">
           <div key={ product.id } className={ `bg-black/50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 ${viewMode === 'list' ? 'flex flex-row relative' : 'flex flex-col h-full'
@@ -53,7 +53,7 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
               />
 
               {/* Price Badge */ }
-              <div className={`absolute ${viewMode === 'list'?' md:top-2 md:right-2':'top-0.5 md:top-2 right-2'}`}>
+              <div className={ `absolute ${viewMode === 'list' ? ' md:top-2 md:right-2' : 'top-0.5 md:top-2 right-2'}` }>
                 <div className="bg-accent text-accent-foreground px-2 py-1 rounded-full font-bold shadow-lg text-xs md:text-sm">
                   { MenuService.formatPrice(product.price) }
                 </div>
@@ -64,7 +64,7 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
                 <div className="absolute top-0.5 md:top-2 left-2">
                   <div className="bg-black text-primary px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
                     <Star className="h-3 w-3 fill-current" />
-                    {/* { viewMode === 'list' ? '' : 'Special' } */}
+                    {/* { viewMode === 'list' ? '' : 'Special' } */ }
                     Special
                   </div>
                 </div>
@@ -72,7 +72,7 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
 
               {/* Discount Badge */ }
               { product.originalPrice ? (
-                <div className={ `absolute ${viewMode === 'list' ? 'md:bottom-2 md:left-2' : 'bottom-2 right-2'}` }>
+                <div className={ `absolute ${viewMode === 'list' ? 'bottom-0.5 left-0.5 md:bottom-2 md:left-2' : 'bottom-0.5 md:bottom-2 right-2'}` }>
                   <Badge variant="destructive" className="font-bold text-xs">
                     { MenuService.getDiscountPercentage(product.originalPrice, product.price) }% OFF
                   </Badge>
@@ -81,9 +81,9 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
             </div>
 
             {/* Product Info */ }
-            <div className={ viewMode === 'list' ? 'flex-1' : 'flex flex-col flex-1' }>
+            <div className={ viewMode === 'list' ? 'flex-1 flex flex-col justify-between' : 'flex flex-col flex-1' }>
               <h3 className={ `font-bold text-base md:text-lg  leading-tight text-center ${viewMode === 'list' ? 'px-4 py-2 text-primary' : 'px-1 py-1 md:py-3 text-card-foreground bg-primary'
-                }` }>{ isArabic ? (product.titleSecondary || product.titlePrimary ) : (product.titlePrimary || product.titleSecondary ) }</h3>
+                }` }>{ isArabic ? (product.titleSecondary || product.titlePrimary) : (product.titlePrimary || product.titleSecondary) }</h3>
               <div className={ `text-center ${viewMode === 'list' ? 'px-4 flex flex-col space-y-1' : 'p-2 md:p-4 space-y-3 flex flex-col flex-1'}` }>
 
                 { (product.description || product.descriptionAr) && (
@@ -106,6 +106,11 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
                     Add
                   </button> }
 
+                  <div className={ `${viewMode === 'list' ? 'block md:hidden' : 'hidden'}` }>
+                    <div className="bg-accent text-accent-foreground px-2 py-1 rounded-full font-bold shadow-lg text-xs md:text-sm">
+                      { MenuService.formatPrice(product.price) }
+                    </div>
+                  </div>
 
                   {/* Price with Original Price */ }
                   <div className="text-right">

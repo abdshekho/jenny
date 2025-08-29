@@ -6,7 +6,7 @@ export function MenuFooter() {
   return (
     <footer className="bg-black/40 text-sidebar-foreground mt-16">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
           {/* Contact Info */}
           <div className="space-y-4 text-white">
             <h3 className="text-lg font-bold text-primary">Contact Us</h3>
