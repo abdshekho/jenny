@@ -24,7 +24,7 @@ export function MenuHeader() {
           <div className="flex items-center justify-center flex-wrap gap-3 md:gap-8 text-sm opacity-80">
             <div className="flex items-center gap-2">
               <Clock className="h-4 w-4 text-primary" />
-              <span>Open: 11:00 AM - 11:00 PM</span>
+              <span>Open: 12:00 PM - 01:00 AM</span>
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="h-4 w-4 text-primary" />
