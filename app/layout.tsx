@@ -29,13 +29,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    siteName: "Jenny's Burger Restaurant Menu",
+    siteName: "Jenny's Burger",
     title: "Jenny's Burger Restaurant Menu",
     description: "Digital menu for Jenny's Burger Restaurant - Browse our delicious dishes and specials",
     url: "https://jenny-burger.vercel.app",
     images: [
       {
-        url: "/1200x630.jpg",
+        url: "/logo.webp",
         width: 1200,
         height: 630,
         alt: "Jenny's Burger Restaurant Menu",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Jenny's Burger Restaurant Menu",
     description: "Digital menu for Jenny's Burger Restaurant - Browse our delicious dishes and specials",
-    images: ["/800x800.jpg"],
+    images: ["/logo.webp"],
   },
   appleWebApp: {
     capable: true,
@@ -54,9 +54,9 @@ export const metadata: Metadata = {
     title: "Jenny's Burger Menu",
     startupImage: [
       // "/apple-touch-startup-image-768x1004.png",
-      "/1200x630.jpg",
+      "/logo.webp",
       {
-        url: "/1200x630.jpg",
+        url: "//logo.webp",
         media: "(device-width: 768px) and (device-height: 1024px)",
       },
     ],
