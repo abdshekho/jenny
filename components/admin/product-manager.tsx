@@ -235,9 +235,7 @@ export function ProductManager() {
                   <div className="aspect-video bg-muted relative overflow-hidden">
                     <img
                       src={
-                        product.image || "/logo.webp" || 
-                        `/placeholder.svg?height=200&width=300&query=${encodeURIComponent(product.titlePrimary)}`
-                      }
+                        product.image || "/logo.webp"}
                       alt={ product.titlePrimary }
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
@@ -396,7 +394,7 @@ function ProductForm({
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="titlePrimary">Primary Title</Label>
+          <Label htmlFor="titlePrimary">Title (English)</Label>
           <Input
             id="titlePrimary"
             value={ formData.titlePrimary }
@@ -407,9 +405,10 @@ function ProductForm({
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="titleSecondary">Secondary Title</Label>
+          <Label htmlFor="titleSecondary">Title (Arabic)</Label>
           <Input
             id="titleSecondary"
+            dir="rtl"
             value={ formData.titleSecondary }
             onChange={ (e) => setFormData((prev) => ({ ...prev, titleSecondary: e.target.value })) }
             placeholder="e.g., دجاج مشوي"

@@ -27,11 +27,11 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
     // Show toast notification
     toast.success(
       isArabic 
-        ? `تم إضافة ${product.titleSecondary || product.titlePrimary} إلى طلبك'`
+        ? `تم إضافة ${product.titleSecondary || product.titlePrimary} إلى طلبك`
         : `${product.titlePrimary || product.titleSecondary} added to your order`,
       {
         description: isArabic 
-          ? `السعر: ${MenuService.formatPrice(product.price)}`
+          ? `${MenuService.formatPrice(product.price)}`
           : `Price: ${MenuService.formatPrice(product.price)}`,
         duration: 2000,
       }
@@ -56,7 +56,7 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
           <div key={ product.id } className={ `bg-black/50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 ${viewMode === 'list' ? 'flex flex-row relative' : 'flex flex-col h-full'
             }` }>
             {/* Product Image */ }
-            <div className={ `bg-black/50 overflow-hidden ${viewMode === 'list' ? 'w-32 h-32 flex-shrink-0' : 'aspect-video relative'
+            <div className={ `bg-black/50 overflow-hidden ${viewMode === 'list' ? 'w-32 h-32 flex-shrink-0' : 'relative'
               }` }>
               <img
                 src={
@@ -108,7 +108,7 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
                 ) }
 
                 {/* Footer Info */ }
-                <div className={ `flex items-center pt-2 mt-auto ${viewMode === 'list' ? 'flex-row-reverse justify-between' : 'justify-between'
+                <div className={ `flex items-center mt-auto pt-2 ${viewMode === 'list' ? 'flex-row-reverse justify-between pb-2' : 'justify-between'
                   }` }>
                   {/* Add to Cart Button */ }
                   { true && <button

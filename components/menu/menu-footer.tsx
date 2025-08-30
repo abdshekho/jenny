@@ -20,15 +20,15 @@ export function MenuFooter() {
                 <Clock className="h-4 w-4 text-primary" />
                 <span className="text-sm">Daily: 12:00 PM - 01:00 AM</span>
               </div>
-              <a className="flex items-center gap-3 "  target="_blank" href="tel:+0114446633">
+              <a className="flex items-center gap-3 "  target="_blank" href="tel:0114446633">
                 <Phone className="h-4 w-4 text-primary" ></Phone>
                 <span className="text-sm">011 4446633</span>
               </a>
-              <a className="flex items-center gap-3 " target="_blank" href="tel:+0114424173">
+              <a className="flex items-center gap-3 " target="_blank" href="tel:0114424173">
                 <PhoneOutgoing className="h-4 w-4 text-primary" />
                 <span className="text-sm">011 4424173</span>
               </a>
-              <a className="flex items-center gap-3 " target="_blank" href="tel:+0114424174">
+              <a className="flex items-center gap-3 " target="_blank" href="tel:0114424174">
                 <PhoneForwarded className="h-4 w-4 text-primary" />
                 <span className="text-sm">011 4424174 </span>
               </a>

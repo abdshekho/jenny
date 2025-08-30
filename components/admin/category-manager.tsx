@@ -240,7 +240,7 @@ function CategoryForm({
     <form onSubmit={ handleSubmit } className="space-y-6">
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="titlePrimary">Primary Title</Label>
+          <Label htmlFor="titlePrimary">Title (English)</Label>
           <Input
             id="titlePrimary"
             value={ formData.titlePrimary }
@@ -251,7 +251,7 @@ function CategoryForm({
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="titleSecondary">Arabic Title</Label>
+          <Label htmlFor="titleSecondary">Title (Arabic)</Label>
           <Input
             id="titleSecondary"
             dir="rtl"

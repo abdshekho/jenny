@@ -87,7 +87,7 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/logo3.webp" type="image/svg+xml" />
+        <link rel="icon" href="/logo3.webp" type="image/webp" />
         <link rel="apple-touch-icon" href="/apple-touch-logo3.webp" />
 
         {/* Apple-specific meta tags */}
@@ -96,12 +96,13 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Jenny's Burger Menu" />
 
         {/* Microsoft-specific meta tags */}
-        <meta name="msapplication-TileColor" content="#15803d" />
+        <meta name="msapplication-TileColor" content="#ffcf09" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
 
         {/* Additional PWA meta tags */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="application-name" content="Jenny's Burger Menu" />
+        <meta name="theme-color" content="#ffcf09" />
 
         <style>{`
 html {
