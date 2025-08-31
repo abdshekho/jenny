@@ -336,6 +336,11 @@ async function syncMenuData() {
       const cache = await caches.open(API_CACHE)
       await cache.put("/api/menu", response.clone())
       console.log("[SW] Menu data synced successfully")
+    }
+  } catch (error) {
+    console.error("[SW] Failed to sync menu data:", error)
+  }
+}
 
       // Notify clients about the update
       const clients = await self.clients.matchAll()

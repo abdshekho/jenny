@@ -50,14 +50,24 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
     title: "Jenny's Burger Menu",
     startupImage: [
-      // "/apple-touch-startup-image-768x1004.png",
-      "/logo.webp",
       {
-        url: "//logo.webp",
-        media: "(device-width: 768px) and (device-height: 1024px)",
+        url: "/icon/maskable_icon_x512.png",
+        media: "(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)",
+      },
+      {
+        url: "/icon/maskable_icon_x512.png",
+        media: "(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)",
+      },
+      {
+        url: "/icon/maskable_icon_x512.png",
+        media: "(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)",
+      },
+      {
+        url: "/icon/maskable_icon_x512.png",
+        media: "(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)",
       },
     ],
   },
@@ -89,7 +99,8 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/logo3.webp" type="image/webp" />
-        <link rel="apple-touch-icon" href="/apple-touch-logo3.webp" />
+        <link rel="apple-touch-icon" href="/icon/maskable_icon_x192.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/icon/maskable_icon_x192.png" />
 
         {/* Apple-specific meta tags */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -103,7 +114,7 @@ export default function RootLayout({
         {/* Additional PWA meta tags */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="application-name" content="Jenny's Burger Menu" />
-        <meta name="theme-color" content="#ffcf09" />
+        <meta name="theme-color" content="#fece0b" />
 
         <style>{`
 html {
