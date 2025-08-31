@@ -83,9 +83,10 @@ export const viewport: Viewport = {
   ],
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
+  userScalable: true,
   viewportFit: "cover",
+  minimumScale: 1,
 }
 
 export default function RootLayout({
@@ -104,8 +105,10 @@ export default function RootLayout({
 
         {/* Apple-specific meta tags */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Jenny's Burger Menu" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Jenny's Burger" />
+        <meta name="apple-touch-fullscreen" content="yes" />
+        <meta name="format-detection" content="telephone=no" />
 
         {/* Microsoft-specific meta tags */}
         <meta name="msapplication-TileColor" content="#ffcf09" />
