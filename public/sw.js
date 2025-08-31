@@ -253,9 +253,9 @@ async function handleNavigationRequest(request) {
               box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             }
             .icon { font-size: 4rem; margin-bottom: 1rem; }
-            h1 { color: #15803d; margin-bottom: 1rem; }
+            h1 { color: #ffcf09; margin-bottom: 1rem; }
             button {
-              background: #15803d;
+              background: #ffcf09;
               color: white;
               border: none;
               padding: 0.75rem 1.5rem;

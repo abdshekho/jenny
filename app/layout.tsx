@@ -102,26 +102,34 @@ export default function RootLayout({
         <link rel="icon" href="/logo3.webp" type="image/webp" />
         <link rel="apple-touch-icon" href="/icon/maskable_icon_x192.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/icon/maskable_icon_x192.png" />
+        <link rel="apple-touch-startup-image" href="/logo2.png"
+          media="(device-width: 375px) and (device-height: 812px) 
+      and (-webkit-device-pixel-ratio: 3)" />
+        <link rel="apple-touch-icon" sizes="120x120" href="/icon/maskable_icon_x128.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="/icon/maskable_icon_x192.png" />
+        <link rel="apple-touch-icon" sizes="167x167" href="/icon/maskable_icon_x192.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/icon/maskable_icon_x192.png" />
 
-        {/* Apple-specific meta tags */}
+
+        {/* Apple-specific meta tags */ }
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Jenny's Burger" />
         <meta name="apple-touch-fullscreen" content="yes" />
         <meta name="format-detection" content="telephone=no" />
 
-        {/* Microsoft-specific meta tags */}
+        {/* Microsoft-specific meta tags */ }
         <meta name="msapplication-TileColor" content="#ffcf09" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
 
-        {/* Additional PWA meta tags */}
+        {/* Additional PWA meta tags */ }
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="application-name" content="Jenny's Burger Menu" />
         <meta name="theme-color" content="#fece0b" />
 
-        {/* Service Worker Registration */}
+        {/* Service Worker Registration */ }
         <script
-          dangerouslySetInnerHTML={{
+          dangerouslySetInnerHTML={ {
             __html: `
               if ('serviceWorker' in navigator) {
                 window.addEventListener('load', () => {
@@ -131,10 +139,10 @@ export default function RootLayout({
                 });
               }
             `,
-          }}
+          } }
         />
 
-        <style>{`
+        <style>{ `
 html {
   font-family: ${GeistSans.style.fontFamily};
   --font-sans: ${GeistSans.variable};
@@ -145,7 +153,7 @@ html {
       <body>
         <LanguageProvider>
           <CartProvider>
-            {children}
+            { children }
             <ServiceWorkerRegistration />
             <Toaster position="top-right" richColors />
           </CartProvider>
