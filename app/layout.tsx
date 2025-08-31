@@ -119,6 +119,21 @@ export default function RootLayout({
         <meta name="application-name" content="Jenny's Burger Menu" />
         <meta name="theme-color" content="#fece0b" />
 
+        {/* Service Worker Registration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                  navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('SW registered:', registration))
+                    .catch(error => console.log('SW registration failed:', error));
+                });
+              }
+            `,
+          }}
+        />
+
         <style>{`
 html {
   font-family: ${GeistSans.style.fontFamily};
