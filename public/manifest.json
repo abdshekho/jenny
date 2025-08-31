@@ -12,6 +12,9 @@
   "lang": "en",
   "categories": ["food", "restaurant", "dining"],
   "dir": "ltr",
+  "related_applications": [],
+  "scope_extensions": [],
+  "iarc_rating_id": "",
 "prefer_related_applications": false,
   "launch_handler": {
     "client_mode": "navigate-existing"
