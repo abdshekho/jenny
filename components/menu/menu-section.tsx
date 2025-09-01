@@ -67,7 +67,7 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
               />
 
               {/* Price Badge */ }
-              <div className={ `absolute ${viewMode === 'list' ? ' md:top-2 md:right-2' : 'top-0.5 md:top-2 right-2'}` }>
+              <div className={ `absolute ${viewMode === 'list' ? ' hidden' : 'top-0.5 md:top-2 right-2'}` }>
                 <div className="bg-accent text-accent-foreground px-2 py-1 rounded-full font-bold shadow-lg text-xs md:text-sm">
                   { MenuService.formatPrice(product.price) }
                 </div>
@@ -98,10 +98,10 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
             <div className={ viewMode === 'list' ? 'flex-1 flex flex-col justify-between' : 'flex flex-col flex-1' }>
               <h3 className={ `font-bold text-base md:text-lg  leading-tight text-center ${viewMode === 'list' ? 'px-4 py-2 text-primary' : 'px-1 py-1 md:py-3 text-primary'
                 }` }>{ isArabic ? (product.titleSecondary || product.titlePrimary) : (product.titlePrimary || product.titleSecondary) }</h3>
-              <div className={ `text-center ${viewMode === 'list' ? 'px-4 flex flex-col space-y-1' : 'p-2 md:p-4 space-y-3 flex flex-col flex-1'}` }>
+              <div className={ `text-center ${viewMode === 'list' ? 'px-2 md:px-4 flex flex-col space-y-1' : 'p-2 md:p-4 space-y-3 flex flex-col flex-1'}` }>
 
                 { (product.description || product.descriptionAr) && (
-                  <p dir={ isArabic ? "rtl" : "ltr" } className={ `text-xs md:text-sm text-white leading-relaxed ${viewMode === 'list' ? 'line-clamp-2 text-center' : 'line-clamp-3'
+                  <p dir={ isArabic ? "rtl" : "ltr" } className={ `text-xs md:text-sm text-white leading-relaxed ${viewMode === 'list' ? 'line-clamp-3 text-center' : 'line-clamp-3'
                     }` }>
                     { isArabic ? (product.descriptionAr || product.description) : (product.description || product.descriptionAr) }
                   </p>

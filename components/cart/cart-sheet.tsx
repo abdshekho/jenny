@@ -33,7 +33,7 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
           <SheetTitle className="text-primary text-center">Your Order ({state.itemCount} items)</SheetTitle>
         </SheetHeader>
         
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full overflow-y-auto">
           {state.items.length === 0 ? (
             <div className="flex-1 flex items-center justify-center">
               <p className="text-muted-foreground">Your order is empty</p>
@@ -42,7 +42,7 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
             <>
               <div className="flex-1 overflow-y-auto py-4 space-y-4">
                 {state.items.map((item) => (
-                  <div key={item.id} className="flex items-center gap-3 p-3 border rounded-lg mx-1 bg-gray-700">
+                  <div key={item.id} className="flex items-center gap-1 md:gap-3 p-3 border rounded-lg mx-1 bg-gray-700">
                     <img
                       src={item.image || "/logo.webp"}
                       alt={item.titlePrimary}
@@ -50,12 +50,12 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
                     />
                     
                     <div className="flex-1">
-                      <h4 className="font-medium bg-primary text-black p-0.5 rounded-sm text-center">{item.titlePrimary}</h4>
-                      <p className="text-sm text-muted-foreground">{item.titleSecondary}</p>
-                      <p className="font-bold text-primary">{MenuService.formatPrice(item.price)}</p>
+                      <h4 className="text-sm md:text-base font-medium bg-primary text-black p-0.5 rounded-sm text-center">{item.titlePrimary}</h4>
+                      <p className="sm:text-xs md:text-sm text-muted-foreground">{item.titleSecondary}</p>
+                      <p className="text-sm md:text-base font-bold text-primary">{MenuService.formatPrice(item.price)}</p>
                     </div>
                     
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1 md:gap-2">
                       <Button
                         variant="outline" className="text-black"
                         size="sm"
