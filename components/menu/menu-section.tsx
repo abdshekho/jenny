@@ -75,7 +75,7 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
 
               {/* Featured Badge */ }
               { product.isFeatured && (
-                <div className="absolute top-0.5 md:top-2 left-2">
+                <div className="absolute top-0.5 md:top-2 left-0.5 md:left-2">
                   <div className="bg-black text-primary px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
                     <Star className="h-3 w-3 fill-current" />
                     {/* { viewMode === 'list' ? '' : 'Special' } */ }
@@ -120,7 +120,7 @@ export function MenuSection({ category, products, viewMode = 'grid' }: MenuSecti
                     Add
                   </button> }
 
-                  <div className={ `${viewMode === 'list' ? 'block md:hidden' : 'hidden'}` }>
+                  <div className={ `${viewMode === 'list' ? '' : 'hidden'}` }>
                     <div className="bg-accent text-accent-foreground px-2 py-1 rounded-full font-bold shadow-lg text-xs md:text-sm">
                       { MenuService.formatPrice(product.price) }
                     </div>
