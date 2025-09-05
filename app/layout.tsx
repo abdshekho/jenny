@@ -142,13 +142,13 @@ export default function RootLayout({
           } }
         />
 
-        <style>{ `
+        {/* <style>{ `
 html {
   font-family: ${GeistSans.style.fontFamily};
   --font-sans: ${GeistSans.variable};
   --font-mono: ${GeistMono.variable};
 }
-        `}</style>
+        `}</style> */}
       </head>
       <body>
         <LanguageProvider>

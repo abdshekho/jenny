@@ -6,7 +6,8 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   try {
     await dbConnect()
     const body = await request.json()
-    const product = await Product.findByIdAndUpdate(params.id, body, { new: true }).populate('categoryId')
+    const resolvedParams = await params
+    const product = await Product.findByIdAndUpdate(resolvedParams.id, body, { new: true }).populate('categoryId')
     
     if (!product) {
       return NextResponse.json({ success: false, error: 'Product not found' }, { status: 404 })
@@ -27,7 +28,8 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     await dbConnect()
-    const product = await Product.findByIdAndDelete(params.id)
+    const resolvedParams = await params;
+    const product = await Product.findByIdAndDelete(resolvedParams.id)
     
     if (!product) {
       return NextResponse.json({ success: false, error: 'Product not found' }, { status: 404 })

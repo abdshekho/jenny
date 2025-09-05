@@ -68,7 +68,7 @@ export default function AdminLoginPage() {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="password">كلمة المرور</Label>
+              <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"

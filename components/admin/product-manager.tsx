@@ -292,7 +292,7 @@ export function ProductManager() {
 
 
 
-                  <div className="flex items-center justify-between pt-2">
+                  <div className="flex items-center justify-between pt-2 flex-wrap gap-1">
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-2">
                         <Switch checked={ product.isActive } onCheckedChange={ () => toggleProductStatus(product.id) } />
@@ -359,8 +359,7 @@ function ProductForm({
     image: product?.image || "",
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = () => {
     onSave({
       ...formData,
       originalPrice: formData.originalPrice === 0 ? null : formData.originalPrice || undefined,
@@ -368,7 +367,7 @@ function ProductForm({
   }
 
   return (
-    <form onSubmit={ handleSubmit } className="space-y-4">
+    <div className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="categoryId">Category</Label>
@@ -496,7 +495,12 @@ function ProductForm({
 
 
       <div className="flex gap-2 pt-4">
-        <Button type="submit" className="flex-1 bg-primary text-black" disabled={ saving }>
+        <Button 
+          type="button" 
+          className="flex-1 bg-primary text-black" 
+          disabled={ saving }
+          onClick={ handleSubmit }
+        >
           { saving && <Loader2 className="h-4 w-4 mr-2 animate-spin" /> }
           { product ? "Update" : "Create" } Product
         </Button>
@@ -504,6 +508,6 @@ function ProductForm({
           Cancel
         </Button>
       </div>
-    </form>
+    </div>
   )
 }
