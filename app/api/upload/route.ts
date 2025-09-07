@@ -39,8 +39,9 @@ export async function POST(request: NextRequest) {
           resource_type: "image",
           folder: "jenny-burger",
           transformation: [
-            // { width: 800, height: 600, crop: "limit" },
-            { quality: "auto:good", format: "webp" }
+            { width: 600, height: 600, crop: "limit" },
+            { quality: 60, format: "webp" },
+            { fetch_format: "auto" }
           ]
         },
         (error, result) => {
