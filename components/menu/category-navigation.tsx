@@ -14,7 +14,6 @@ interface CategoryNavigationProps {
 export function CategoryNavigation({ categories, selectedCategory, onCategoryChange }: CategoryNavigationProps) {
   const { isArabic } = useLanguage()
   const activeCategories = categories.filter((cat) => cat.isActive).sort((a, b) => a.order - b.order)
-  console.log("cccccccccccccccccccc",activeCategories);
   return (
     <nav className="sticky top-0 z-10  backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4 py-4">

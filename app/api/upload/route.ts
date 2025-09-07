@@ -1,8 +1,12 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { writeFile, mkdir } from "fs/promises"
-import { join } from "path"
-import { existsSync } from "fs"
-import sharp from "sharp"
+import { v2 as cloudinary } from 'cloudinary'
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+})
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,41 +28,35 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "File too large" }, { status: 400 })
     }
 
-    // Create upload directory if it doesn't exist
-    const uploadDir = join(process.cwd(), "public", "uploads")
-    if (!existsSync(uploadDir)) {
-      await mkdir(uploadDir, { recursive: true })
-    }
-
-    // Generate unique filename
-    const timestamp = Date.now()
-    const randomString = Math.random().toString(36).substring(2, 15)
-    const extension = file.name.split(".").pop() || "webp"
-    const filename = `${timestamp}-${randomString}.${extension}`
-
     // Convert file to buffer
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
 
-    // Compress image using sharp
-    const compressedBuffer = await sharp(buffer)
-      .resize(800, 600, { fit: 'inside', withoutEnlargement: true })
-      .webp({ quality: 70, effort: 6 })
-      .toBuffer()
+    // Upload to Cloudinary
+    const result = await new Promise((resolve, reject) => {
+      cloudinary.uploader.upload_stream(
+        {
+          resource_type: "image",
+          folder: "jenny-burger",
+          transformation: [
+            // { width: 800, height: 600, crop: "limit" },
+            { quality: "auto:good", format: "webp" }
+          ]
+        },
+        (error, result) => {
+          if (error) reject(error)
+          else resolve(result)
+        }
+      ).end(buffer)
+    })
 
-    // Always save as .webp for better compression
-    const webpFilename = `${timestamp}-${randomString}.webp`
-    const filepath = join(uploadDir, webpFilename)
-    await writeFile(filepath, compressedBuffer)
-
-    // Return the public URL
-    const url = `/uploads/${webpFilename}`
+    const uploadResult = result as any
 
     return NextResponse.json({
       success: true,
-      url,
-      filename: webpFilename,
-      size: compressedBuffer.length,
+      url: uploadResult.secure_url,
+      filename: uploadResult.public_id,
+      size: uploadResult.bytes,
       type: 'image/webp',
     })
   } catch (error) {

@@ -449,6 +449,7 @@ function ProductForm({
             id="price"
             type="number"
             step="1000"
+            min={0}
             value={ formData.price }
             onFocus={ (e) => e.target.select() }
             onChange={ (e) => setFormData((prev) => ({ ...prev, price: Number.parseFloat(e.target.value) || 0 })) }
@@ -462,6 +463,7 @@ function ProductForm({
             id="originalPrice"
             type="number"
             step="1000"
+            min={formData.price}
             onFocus={ (e) => e.target.select() }
             value={ formData.originalPrice }
             onChange={ (e) =>
@@ -479,7 +481,6 @@ function ProductForm({
           <div className="flex gap-2">
             <ImageGalleryDialog
               onSelect={ (url) => {
-                console.log('Selected image URL:', url)
                 setFormData((prev) => ({ ...prev, image: url }))
               }}
               selectedUrl={ formData.image }

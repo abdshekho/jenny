@@ -113,7 +113,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 body {
-    background-image: url('../public/background.avif'); /* رابط الصورة */
+    background-image: url('../public/body-background2.jpg'); /* رابط الصورة */
     background-repeat: repeat; /* تكرار الصورة لتغطي كل الصفحة */
     background-size: auto; /* ممكن تستخدم cover إذا بدك تغطي كل الشاشة */
     background-attachment: fixed; /* لتثبيت الخلفية عند السكول */

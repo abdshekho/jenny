@@ -27,7 +27,6 @@ export function CategoryManager() {
 
   useEffect(() => {
     loadCategories()
-    console.log('tttttttttttttt', categories);
   }, [])
 
   const loadCategories = async () => {
