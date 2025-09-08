@@ -53,12 +53,21 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
                         className="w-16 h-16 object-cover rounded"
                       />
 
-                      <div className="flex-1">
+                      <div className="flex-1 text-center">
                         <p className="sm:text-xs md:text-sm text-muted-foreground">{ item.titleSecondary }</p>
                         <p className="text-sm md:text-base font-bold text-primary">{ MenuService.formatPrice(item.price) }</p>
                       </div>
 
                       <div className="flex items-center gap-1 md:gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={ () => removeItem(item.id) }
+                          className="text-destructive"
+                        >
+                          <Trash2 className="h-3 w-3" />
+                        </Button>
+
                         <Button
                           variant="outline" className="text-black"
                           size="sm"
@@ -77,14 +86,7 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
                           <Plus className="h-3 w-3" />
                         </Button>
 
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={ () => removeItem(item.id) }
-                          className="text-destructive"
-                        >
-                          <Trash2 className="h-3 w-3" />
-                        </Button>
+
                       </div>
                     </div></div>
                 )) }
